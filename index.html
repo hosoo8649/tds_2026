@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Quickly — 사내 일정 조율 프로토타입</title>
+<style>
+:root{--blue:#3182f6;--blue2:#1b64da;--blue50:#eaf2ff;--bg:#f5f7fa;--line:#e5e8eb;--text:#191f28;--sub:#6b7684;--muted:#8b95a1;--green:#16a66a;--green50:#edf9f3;--orange:#f79009;--orange50:#fff7e8;--red:#f04452;--gray50:#f9fafb;--gray100:#f2f4f6;--shadow:0 24px 70px rgba(15,23,42,.15)}
+*{box-sizing:border-box}html,body{margin:0;background:linear-gradient(#f8fbff,#f3f5f8);font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif;color:var(--text)}button,input{font:inherit}.page{min-height:100vh;padding:14px 18px 18px;overflow:hidden}.hero{text-align:center}.brandline{display:inline-flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(#6aa8ff,#2f7df2);color:#fff;box-shadow:0 10px 22px rgba(49,130,246,.28)}h1{margin:0;font-size:34px;letter-spacing:-1.3px}.hero p{margin:4px 0 0;color:var(--sub);font-size:15px}.principle{display:inline-flex;margin-top:7px;padding:7px 12px;border:1px solid #d8e6ff;border-radius:999px;background:#fff;color:var(--blue2);font-size:13px;font-weight:800}.flow{max-width:940px;margin:10px auto 0;display:grid;grid-template-columns:360px 64px 360px;gap:18px;align-items:start}.role{text-align:center;margin-bottom:7px;font-weight:900;color:var(--blue2);font-size:17px}.phone{width:360px;height:700px;margin:auto;background:#fff;border:9px solid #111827;border-radius:38px;box-shadow:var(--shadow);overflow:hidden;position:relative}.phone:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:145px;height:23px;background:#0b0f17;border-radius:0 0 16px 16px;z-index:5}.status{height:30px;padding:10px 20px 0;font-size:12px;font-weight:800;display:flex;justify-content:space-between}.appbar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid rgba(229,232,235,.7)}.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:18px}.mini{width:23px;height:23px;border-radius:7px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px}.icons{color:#4e5968;font-size:17px;letter-spacing:8px}.body{height:calc(100% - 82px);overflow:auto;padding-bottom:92px;scrollbar-width:none}.body::-webkit-scrollbar{display:none}.screen{display:none}.screen.show{display:block}.head{padding:13px 18px 8px}.eyebrow{font-size:13px;color:var(--blue2);font-weight:900;margin-bottom:6px}.head h2{font-size:28px;line-height:1.2;letter-spacing:-.8px;margin:0}.desc{font-size:14px;line-height:1.45;color:var(--sub);margin-top:8px}.section{padding:10px 17px}.title{font-size:17px;font-weight:900;margin:0 3px 9px}.card{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 7px 22px rgba(15,23,42,.04)}.field{padding:15px 16px;border-top:1px solid var(--line)}.field:first-child{border-top:0}.label{font-size:12px;color:var(--muted);font-weight:800}.value{font-size:20px;font-weight:900;margin-top:3px;letter-spacing:-.3px}.input{width:100%;height:48px;border:1px solid var(--line);border-radius:13px;padding:0 14px;font-weight:800;font-size:16px;outline:0}.input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(49,130,246,.12)}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:0;background:var(--gray100);color:#4e5968;border-radius:12px;padding:10px 13px;font-weight:800;cursor:pointer}.chip.on{background:var(--blue);color:#fff}.bottom{position:absolute;left:0;right:0;bottom:0;padding:10px 15px 13px;background:linear-gradient(transparent,#fff 22%,#fff)}.cta{width:100%;height:54px;border:0;border-radius:16px;background:var(--blue);color:#fff;font-size:17px;font-weight:900;cursor:pointer}.cta.secondary{background:var(--gray100);color:var(--text)}.step{display:flex;gap:5px;padding:8px 18px 0}.step i{height:5px;flex:1;border-radius:999px;background:#e5e8eb}.step i.on{background:var(--blue)}.person{display:flex;align-items:center;gap:11px;padding:13px 15px;border-top:1px solid var(--line)}.person:first-child{border-top:0}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:#eaf2ff;color:var(--blue2)}.person-main{flex:1;min-width:0}.person-name{font-weight:900}.person-meta{font-size:12px;color:var(--muted);margin-top:3px}.seg{display:flex;background:var(--gray100);padding:3px;border-radius:10px}.seg button{border:0;background:transparent;padding:7px 9px;border-radius:8px;font-size:12px;font-weight:900;color:var(--muted);cursor:pointer}.seg button.on{background:#fff;color:var(--text);box-shadow:0 2px 7px rgba(15,23,42,.08)}.searchrow{display:flex;gap:8px}.searchrow .input{flex:1}.add{width:48px;border:0;border-radius:13px;background:var(--blue);color:white;font-size:23px;font-weight:700}.empty{padding:23px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5}.room{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 15px;border-top:1px solid var(--line);cursor:pointer}.room:first-child{border-top:0}.room strong{display:block;font-size:16px}.room span{display:block;margin-top:4px;color:var(--muted);font-size:12px}.roomstate{padding:6px 9px;border-radius:999px;background:var(--gray100);color:var(--muted);font-size:12px;font-weight:900}.room.selected{background:var(--blue50)}.room.selected .roomstate{background:var(--blue);color:#fff}.info{padding:13px 15px;border-radius:15px;background:var(--blue50);color:var(--blue2);font-size:13px;line-height:1.45}.recommend{padding:15px}.rec-title{font-size:21px;font-weight:900}.rec-sub{font-size:13px;color:var(--sub);line-height:1.45;margin-top:5px}.badge{display:inline-flex;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:900;background:var(--green50);color:var(--green)}.candidate{padding:14px 15px;border-top:1px solid var(--line);cursor:pointer}.candidate:first-child{border-top:0}.candidate.selected{background:var(--blue50)}.candtop{display:flex;justify-content:space-between;gap:10px}.candtime{font-size:19px;font-weight:900}.canddate{font-size:13px;color:var(--sub);margin-top:3px}.reasons{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.reason{font-size:11px;font-weight:800;background:var(--gray100);padding:6px 8px;border-radius:8px;color:#4e5968}.candidate.selected .reason{background:#fff}.warning{background:var(--orange50);color:#a15c00}.ask{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 15px}.ask strong{font-size:14px}.ask p{font-size:12px;color:var(--sub);margin:4px 0 0}.smallbtn{border:0;border-radius:11px;background:var(--blue50);color:var(--blue2);font-size:12px;font-weight:900;padding:9px 11px;cursor:pointer}.profile{padding:18px;text-align:center}.profile .avatar{width:60px;height:60px;margin:auto;font-size:19px}.profile h3{margin:10px 0 3px;font-size:21px}.profile p{margin:0;color:var(--sub);font-size:13px}.setting{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-top:1px solid var(--line)}.setting:first-child{border-top:0}.setting strong{font-size:14px}.setting span{display:block;font-size:12px;color:var(--sub);margin-top:3px}.toggle{width:45px;height:27px;border-radius:999px;background:var(--blue);padding:3px;display:flex;justify-content:flex-end}.toggle:after{content:"";width:21px;height:21px;background:#fff;border-radius:50%;box-shadow:0 2px 7px rgba(0,0,0,.18)}.notif{padding:17px}.notif h3{margin:0;font-size:20px}.notif p{font-size:13px;color:var(--sub);line-height:1.45}.meetingbox{margin-top:12px;border:1px solid #d8e6ff;background:#f8fbff;border-radius:15px;padding:14px}.meetingbox strong{display:block;font-size:17px}.meetingbox span{display:block;font-size:13px;color:var(--sub);margin-top:5px;line-height:1.45}.twobtn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.twobtn button{height:43px;border-radius:12px;border:0;font-weight:900;cursor:pointer}.primary{background:var(--blue);color:#fff}.ghost{background:var(--gray100);color:var(--text)}.arrowcol{height:700px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px}.arrow{font-size:58px;color:var(--blue);transition:.3s}.arrow.pulse{transform:translateX(8px);filter:drop-shadow(0 12px 15px rgba(49,130,246,.3))}.flownote{text-align:center;background:#fff;border:1px solid #d8e6ff;color:var(--blue2);border-radius:15px;padding:10px;font-size:13px;font-weight:900;line-height:1.4}.flownote small{display:block;color:var(--sub);font-size:10px;margin-top:3px}.onboard-progress{display:flex;gap:6px;padding:10px 18px 2px}.onboard-progress i{height:5px;flex:1;border-radius:999px;background:var(--line)}.onboard-progress i.on{background:var(--blue)}.onboard-panel{display:none}.onboard-panel.show{display:block}.onboard-bottom{position:absolute;left:0;right:0;bottom:0;padding:10px 15px 13px;background:linear-gradient(transparent,#fff 22%,#fff);z-index:4}.setup-primary{width:100%;height:54px;border:0;border-radius:16px;background:var(--blue);color:#fff;font-size:16px;font-weight:900;cursor:pointer}.setup-item.active{background:var(--blue50)}.calendar-options{overflow:hidden}.calendar-option{width:100%;border:0;border-top:1px solid var(--line);background:#fff;padding:14px 15px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer}.calendar-option:first-child{border-top:0}.calendar-option.selected{background:var(--blue50)}.calendar-option>span:nth-child(2){flex:1}.calendar-option strong{display:block;font-size:15px}.calendar-option small{display:block;color:var(--sub);font-size:12px;margin-top:4px}.calendar-option b{color:var(--blue);font-size:18px}.calendar-logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#fff}.calendar-logo.google{background:#4285f4}.calendar-logo.outlook{background:#0a64ad}.calendar-logo.internal{background:#7c3aed}.privacy-note{padding:14px 15px;border-radius:15px;background:var(--gray50);border:1px solid var(--line);font-size:13px;line-height:1.45}.privacy-note b,.privacy-note span{display:block}.privacy-note span{color:var(--sub);margin-top:5px}.pref-toggle{width:45px;height:27px;border:0;border-radius:999px;background:#d1d6db;padding:3px;display:flex;justify-content:flex-start;cursor:pointer}.pref-toggle.on{background:var(--blue);justify-content:flex-end}.pref-toggle:after{content:"";width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.18)}.setup-complete{padding:72px 22px 20px;text-align:center}.complete-icon{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-size:30px;font-weight:900;box-shadow:0 14px 28px rgba(22,166,106,.22)}.setup-complete h2{margin:0;font-size:29px;letter-spacing:-.8px}.setup-complete p{margin:12px 0 22px;color:var(--sub);font-size:14px;line-height:1.55}.complete-summary{text-align:left;border:1px solid var(--line);border-radius:18px;overflow:hidden}.complete-summary div{padding:14px 15px;border-top:1px solid var(--line)}.complete-summary div:first-child{border-top:0}.complete-summary span{display:block;color:var(--muted);font-size:12px;font-weight:800}.complete-summary strong{display:block;margin-top:4px;font-size:15px}
+.home-top{display:flex;align-items:flex-start;justify-content:space-between;padding:24px 20px 10px}.home-greeting{font-size:14px;line-height:21px;color:var(--sub);font-weight:600;margin-bottom:5px}.home-top h2{margin:0;font-size:26px;line-height:35px;font-weight:700;letter-spacing:-.5px}.home-profile{width:42px;height:42px;border:0;border-radius:50%;background:var(--blue50);color:var(--blue2);font-size:16px;font-weight:700}.home-section{padding-top:10px;padding-bottom:8px}.home-summary{display:grid;grid-template-columns:repeat(3,1fr);background:var(--gray50);border-radius:18px;padding:15px 10px}.home-summary div{text-align:center;border-left:1px solid var(--line)}.home-summary div:first-child{border-left:0}.home-summary span{display:block;font-size:12px;line-height:18px;color:var(--sub)}.home-summary strong{display:block;margin-top:3px;font-size:21px;line-height:29px;font-weight:700}.home-title-row{display:flex;align-items:center;justify-content:space-between}.text-link{border:0;background:transparent;color:var(--blue2);font-size:13px;font-weight:600;padding:4px}.home-request-list{display:flex;flex-direction:column;gap:10px}.home-request{width:100%;display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff;text-align:left;cursor:pointer}.home-request.urgent{border-color:#c8ddff;background:#f8fbff}.request-date{width:44px;height:50px;border-radius:14px;background:var(--blue50);color:var(--blue2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 44px}.request-date.muted{background:var(--gray50);color:var(--sub)}.request-date strong{font-size:18px;line-height:21px}.request-date span{font-size:11px;line-height:15px}.request-copy{flex:1;min-width:0}.request-title{font-size:15px;line-height:22px;font-weight:700}.request-meta,.request-owner{font-size:12px;line-height:18px;color:var(--sub)}.request-owner{margin-top:2px}.request-status{padding:6px 8px;border-radius:999px;font-size:11px;line-height:16px;font-weight:700;white-space:nowrap}.request-status.action{background:var(--blue50);color:var(--blue2)}.request-status.waiting{background:var(--gray50);color:var(--sub)}.upcoming-list{overflow:hidden}.upcoming-row{display:flex;align-items:center;gap:12px;padding:14px 15px;border-top:1px solid var(--line)}.upcoming-row:first-child{border-top:0}.upcoming-row>div:nth-child(2){flex:1}.upcoming-row strong{display:block;font-size:14px;line-height:21px}.upcoming-row span{display:block;font-size:12px;line-height:18px;color:var(--sub);margin-top:2px}.upcoming-time{width:46px;color:var(--sub);font-size:11px;line-height:16px}.upcoming-time b{font-size:14px;color:var(--text)}.calendar-chip{padding:5px 8px;border-radius:999px;background:#ecfdf3;color:#067647!important;font-size:11px!important;font-weight:700}.home-bottom-nav{position:absolute;left:0;right:0;bottom:0;height:62px;padding:7px 12px 9px;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:3}.home-bottom-nav button{border:0;background:transparent;color:var(--muted);font-size:12px;font-weight:600}.home-bottom-nav button.active{color:var(--blue2)}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,12px);background:#191f28;color:#fff;padding:11px 14px;border-radius:12px;font-size:13px;font-weight:800;opacity:0;transition:.2s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+.recoord-card{padding:15px}.recoord-title{font-size:21px;font-weight:900}.recoord-desc{font-size:13px;color:var(--sub);line-height:1.45;margin-top:6px}.alt-candidate{padding:14px 15px;border-top:1px solid var(--line);cursor:pointer}.alt-candidate:first-child{border-top:0}.alt-candidate.selected{background:var(--blue50)}.alt-top{display:flex;justify-content:space-between;gap:10px}.alt-time{font-size:18px;font-weight:900}.alt-meta{font-size:12px;color:var(--sub);margin-top:4px}.danger-info{padding:13px 15px;border-radius:15px;background:var(--orange50);color:#9a5b00;font-size:13px;line-height:1.45}.success-info{padding:13px 15px;border-radius:15px;background:var(--green50);color:var(--green);font-size:13px;line-height:1.45}
+.onboard-hero{padding:18px;text-align:center}.onboard-icon{width:64px;height:64px;margin:0 auto 12px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(#6aa8ff,#2f7df2);color:#fff;font-size:30px;box-shadow:0 12px 26px rgba(49,130,246,.24)}.onboard-hero h3{margin:0;font-size:24px;letter-spacing:-.6px}.onboard-hero p{margin:8px 0 0;color:var(--sub);font-size:14px;line-height:1.5}.setup-list{padding:0 15px}.setup-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line)}.setup-item:first-child{border-top:0}.setup-check{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--gray100);color:var(--muted);font-weight:900;flex:0 0 30px}.setup-item.done .setup-check{background:var(--green50);color:var(--green)}.setup-item strong{display:block;font-size:15px}.setup-item span{display:block;margin-top:4px;color:var(--sub);font-size:12px;line-height:1.4}.setup-actions{display:grid;gap:8px;padding:14px 15px 16px}.setup-actions button{height:46px;border:0;border-radius:13px;font-weight:900;cursor:pointer}.setup-primary{background:var(--blue);color:#fff}.setup-secondary{background:var(--gray100);color:var(--text)}.status-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:900}.status-chip.ready{background:var(--green50);color:var(--green)}.status-chip.missing{background:var(--orange50);color:#9a5b00}.directory-status{margin-left:auto}.setup-warning{padding:12px 14px;border-radius:14px;background:var(--orange50);color:#9a5b00;font-size:12px;line-height:1.45;margin-top:10px}.person-meta .missing-text{color:#9a5b00;font-weight:800}
+
+
+.progress-card{padding:16px}.progress-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.progress-title{font-size:20px;font-weight:900}.progress-meta{margin-top:5px;color:var(--sub);font-size:13px;line-height:1.45}.progress-bar{height:9px;background:var(--gray100);border-radius:999px;overflow:hidden;margin-top:15px}.progress-fill{height:100%;background:var(--blue);border-radius:999px;transition:width .3s}.progress-caption{margin-top:9px;color:var(--muted);font-size:12px}.member-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;border-top:1px solid var(--line)}.member-row:first-child{border-top:0}.member-info{display:flex;align-items:center;gap:11px}.member-info strong{font-size:14px}.subtle{font-size:12px;color:var(--muted);margin-top:3px}.member-badge{padding:6px 9px;border-radius:999px;font-size:11px;font-weight:900}.member-badge.done{background:var(--green50);color:var(--green)}.member-badge.wait{background:var(--orange50);color:var(--orange)}.analysis-loading{display:none;padding:26px 18px 18px;text-align:center}.analysis-loading.show{display:block}.analysis-result{display:block}.analysis-result.hidden{display:none}.spinner{width:48px;height:48px;border:4px solid #dbe8ff;border-top-color:var(--blue);border-radius:50%;margin:4px auto 18px;animation:spin .8s linear infinite}.loading-title{font-size:20px;font-weight:900;letter-spacing:-.4px}.loading-desc{margin-top:7px;color:var(--sub);font-size:13px;line-height:1.5}.loading-steps{margin-top:18px;text-align:left;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.loading-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--line);font-size:13px;font-weight:800;color:var(--muted)}.loading-row:first-child{border-top:0}.loading-row.active{color:var(--blue2);background:var(--blue50)}.loading-row.done{color:var(--green)}.loading-row .state{margin-left:auto;font-size:12px}.loading-dot{width:9px;height:9px;border-radius:50%;background:#d1d6db}.loading-row.active .loading-dot{background:var(--blue);box-shadow:0 0 0 5px rgba(49,130,246,.12)}.loading-row.done .loading-dot{background:var(--green)}@keyframes spin{to{transform:rotate(360deg)}}
+
+.directory{position:relative}.directory-results{display:none;position:absolute;left:0;right:56px;top:54px;z-index:8;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 35px rgba(15,23,42,.14);max-height:245px;overflow:auto}.directory-results.show{display:block}.directory-item{display:flex;align-items:center;gap:11px;padding:12px 13px;border-top:1px solid var(--line);cursor:pointer;text-align:left;width:100%;background:#fff;border-left:0;border-right:0;border-bottom:0}.directory-item:first-child{border-top:0}.directory-item:hover{background:var(--gray50)}.photo{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;flex:0 0 40px;background:linear-gradient(145deg,#8fb9ff,#477fe8)}.directory-name{font-weight:900}.directory-meta{font-size:12px;color:var(--muted);margin-top:3px}.candidate-actions{display:flex;justify-content:flex-end;margin-top:10px}.detail-btn{border:0;background:transparent;color:var(--blue2);font-size:12px;font-weight:900;padding:5px 0;cursor:pointer}.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--gray100);padding:4px;border-radius:13px;margin-bottom:10px}.mode-tabs button{height:40px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-weight:900;cursor:pointer}.mode-tabs button.on{background:#fff;color:var(--text);box-shadow:0 2px 8px rgba(15,23,42,.08)}.direct-panel{display:none}.direct-panel.show{display:block}.direct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.direct-time{height:42px;border:1px solid var(--line);border-radius:11px;background:#fff;color:#4e5968;font-size:12px;font-weight:900;cursor:pointer}.direct-time.on{border-color:var(--blue);background:var(--blue50);color:var(--blue2)}.direct-select{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.direct-select select{height:43px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:0 10px;font-weight:800;color:var(--text)}.sheet-backdrop{display:none;position:absolute;inset:0;background:rgba(25,31,40,.38);z-index:30}.sheet-backdrop.show{display:block}.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:18px 17px 22px;box-shadow:0 -16px 40px rgba(15,23,42,.2)}.sheet-handle{width:42px;height:4px;border-radius:99px;background:#d1d6db;margin:0 auto 14px}.sheet h3{margin:0;font-size:21px}.sheet p{margin:6px 0 13px;color:var(--sub);font-size:13px;line-height:1.45}.impact{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)}.impact:first-of-type{border-top:0}.impact .avatar{flex:0 0 38px}.impact strong{font-size:14px}.impact span{display:block;margin-top:3px;color:var(--muted);font-size:12px}.close-sheet{width:100%;height:46px;border:0;border-radius:13px;background:var(--gray100);font-weight:900;margin-top:10px;cursor:pointer}
+@media(max-width:820px){.page{overflow:auto}.flow{grid-template-columns:1fr}.arrowcol{height:auto;flex-direction:row}.arrow{transform:rotate(90deg)}.arrow.pulse{transform:rotate(90deg) translateX(8px)}.phone{height:700px}}
+
+/* TDS Mobile typography refinement */
+:root{
+  --tds-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --t1-size:30px; --t1-line:40px;
+  --t2-size:26px; --t2-line:35px;
+  --t3-size:22px; --t3-line:31px;
+  --t4-size:20px; --t4-line:29px;
+  --t5-size:17px; --t5-line:25.5px;
+  --t6-size:15px; --t6-line:22.5px;
+  --t7-size:13px; --t7-line:19.5px;
+}
+html,body,button,input,select,textarea{font-family:var(--tds-font);font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{letter-spacing:0}
+h1,.hero h1{font-size:30px;line-height:40px;font-weight:700;letter-spacing:-.6px}
+.hero p{font-size:15px;line-height:22.5px;font-weight:400;letter-spacing:-.1px}
+.principle{font-size:13px;line-height:19.5px;font-weight:600;letter-spacing:-.05px}
+.role{font-size:17px;line-height:25.5px;font-weight:700;letter-spacing:-.2px}
+.brand{font-size:17px;line-height:25.5px;font-weight:700;letter-spacing:-.2px}
+.status{font-size:11px;line-height:16.5px;font-weight:600}
+.head{padding:14px 20px 10px}
+.eyebrow{font-size:13px;line-height:19.5px;font-weight:600;letter-spacing:-.05px;margin-bottom:4px}
+.head h2{font-size:26px;line-height:35px;font-weight:700;letter-spacing:-.55px}
+.desc{font-size:15px;line-height:22.5px;font-weight:400;letter-spacing:-.1px;margin-top:6px}
+.title,.section-title{font-size:17px;line-height:25.5px;font-weight:700;letter-spacing:-.2px}
+.label,.row-label{font-size:13px;line-height:19.5px;font-weight:500;letter-spacing:-.05px}
+.value,.row-value{font-size:20px;line-height:29px;font-weight:700;letter-spacing:-.3px}
+.input{font-size:17px;line-height:25.5px;font-weight:500;letter-spacing:-.1px}
+.chip{font-size:15px;line-height:22.5px;font-weight:600;letter-spacing:-.1px}
+.cta,.setup-primary{font-size:17px;line-height:25.5px;font-weight:700;letter-spacing:-.2px}
+.person-name,.directory-name{font-size:15px;line-height:22.5px;font-weight:600;letter-spacing:-.1px}
+.person-meta,.directory-meta,.room span,.calendar-option small,.profile p,.setting span,.ask p,.notif p,.meetingbox span{font-size:13px;line-height:19.5px;font-weight:400;letter-spacing:-.05px}
+.seg button,.smallbtn,.badge,.reason,.status-chip,.roomstate,.member-badge{font-weight:600;letter-spacing:-.05px}
+.room strong,.calendar-option strong,.setting strong,.ask strong{font-size:15px;line-height:22.5px;font-weight:600;letter-spacing:-.1px}
+.info,.privacy-note{font-size:14px;line-height:21px;font-weight:400;letter-spacing:-.05px}
+.rec-title,.candtime,.profile h3,.notif h3{font-size:20px;line-height:29px;font-weight:700;letter-spacing:-.3px}
+.rec-sub,.canddate{font-size:14px;line-height:21px;font-weight:400;letter-spacing:-.05px}
+.flownote{font-size:13px;line-height:19.5px;font-weight:600;letter-spacing:-.05px}
+.flownote small{font-size:11px;line-height:16.5px;font-weight:400}
+.card{box-shadow:none}
+.phone{box-shadow:0 20px 50px rgba(0,23,51,.12)}
+
+.sender-home{padding:14px 17px 88px}.sender-home-top{display:flex;align-items:flex-start;justify-content:space-between;padding:4px 2px 14px}.sender-home-top h2{margin:3px 0 0;font-size:26px;line-height:35px;font-weight:700;letter-spacing:-.5px}.sender-home-top span{font-size:14px;color:var(--sub)}.fab-create{width:100%;height:54px;border:0;border-radius:16px;background:var(--blue);color:#fff;font-size:17px;font-weight:700;margin-bottom:16px;cursor:pointer}.home-list-title{font-size:17px;font-weight:700;margin:18px 2px 10px}.meeting-card{display:flex;gap:12px;align-items:center;padding:15px;border-top:1px solid var(--line)}.meeting-card:first-child{border-top:0}.meeting-date{width:46px;height:50px;border-radius:14px;background:var(--blue50);display:grid;place-items:center;color:var(--blue2);font-size:12px}.meeting-date b{font-size:18px}.meeting-copy{flex:1}.meeting-copy strong{display:block;font-size:15px}.meeting-copy span{display:block;font-size:12px;color:var(--sub);margin-top:4px}.status-pill{padding:6px 9px;border-radius:999px;font-size:11px;font-weight:700;background:var(--gray100);color:var(--sub)}.status-pill.action{background:var(--blue50);color:var(--blue2)}
+.room-panel{display:none}.room-panel.show{display:block}.online-panel{display:none}.online-panel.show{display:block}.setup-action{margin-top:8px;width:100%;height:40px;border:0;border-radius:11px;background:#fff;color:var(--blue2);font-weight:700;cursor:pointer}.setup-request-btn{border:0;border-radius:10px;background:var(--blue50);color:var(--blue2);font-size:12px;font-weight:700;padding:8px 10px;cursor:pointer}
+
+.scenario-switch{width:min(720px,calc(100vw - 36px));height:56px;margin:0 auto 14px;padding:4px;background:var(--gray100);border-radius:16px;display:grid;grid-template-columns:1fr 1fr;gap:4px;position:relative}.scenario-switch button{height:48px;border:0;border-radius:12px;background:transparent;color:var(--sub);font-size:16px;font-weight:700;cursor:pointer;transition:background .2s ease,color .2s ease,box-shadow .2s ease}.scenario-switch button.active{background:#fff;color:var(--text);box-shadow:0 2px 8px rgba(0,23,51,.10)}.flow.first-use{grid-template-columns:1fr;max-width:430px}.flow.first-use #senderColumn,.flow.first-use #arrowColumn{display:none}.flow.first-use #receiverRoleLabel{display:none}.flow.first-use #receiverColumn{width:100%}.page{padding-top:12px}.flow{margin-top:0}
+
+/* Quickly common chrome */
+.wordmark{font-size:19px;line-height:28px;font-weight:700;letter-spacing:-.35px;color:var(--text)}
+.app-actions{display:flex;align-items:center;gap:2px}
+.tds-icon-button{width:40px;height:40px;border:0;border-radius:12px;background:transparent;padding:8px;display:grid;place-items:center;cursor:pointer}
+.tds-icon-button:active{background:rgba(2,32,71,.05)}
+.tds-icon-button img{width:24px;height:24px;display:block;opacity:.78}
+.home-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:15px}
+.home-bottom-nav button img{width:22px;height:22px;opacity:.48}
+.home-bottom-nav button.active img{opacity:.92;filter:invert(43%) sepia(98%) saturate(2719%) hue-rotate(204deg) brightness(99%) contrast(95%)}
+.onboarding-visual{height:270px;margin:8px 17px 0;border-radius:24px;background:linear-gradient(180deg,#f4f8ff,#fff);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.onboarding-visual .visual-card{width:250px;border:1px solid #e5e8eb;border-radius:22px;background:#fff;padding:20px;box-shadow:0 18px 38px rgba(15,23,42,.10)}
+.onboarding-visual .visual-icon{width:56px;height:56px;border-radius:18px;background:var(--blue50);display:grid;place-items:center;margin:0 auto 16px;font-size:26px}
+.onboarding-visual strong{display:block;text-align:center;font-size:18px;line-height:26px}
+.onboarding-visual span{display:block;text-align:center;color:var(--sub);font-size:13px;line-height:20px;margin-top:7px}
+.onboard-dots{display:flex;justify-content:center;gap:7px;margin-top:18px}.onboard-dots i{width:7px;height:7px;border-radius:999px;background:var(--line)}.onboard-dots i.on{width:20px;background:var(--blue)}
+.preference-block{padding:15px 16px;border-top:1px solid var(--line)}.preference-block:first-child{border-top:0}.preference-block strong{font-size:15px;line-height:22px}.preference-block p{margin:4px 0 12px;color:var(--sub);font-size:12px;line-height:18px}
+.preference-options{display:flex;gap:7px;flex-wrap:wrap}.pref-chip{border:0;border-radius:11px;padding:9px 11px;background:var(--gray100);color:#4e5968;font-size:12px;font-weight:700;cursor:pointer}.pref-chip.on{background:var(--blue50);color:var(--blue2)}
+
+.tds-icon-button{position:relative;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#4e5968;cursor:pointer}
+.tds-icon-button:hover{background:var(--gray100)}.tds-icon-button:active{background:#e5e8eb}
+.tds-icon-button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tds-icon-button.has-dot::after{content:"";position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--red);border:2px solid #fff}
+.home-bottom-nav button .nav-icon{width:22px;height:22px;display:block;color:currentColor}
+.home-bottom-nav button .nav-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.home-bottom-nav button.active .nav-icon.home svg path.home-fill{fill:currentColor;stroke:currentColor}
+.meeting-card,.upcoming-row{cursor:pointer}.meeting-card:hover,.upcoming-row:hover{background:var(--gray50)}
+.phone-modal{display:none;position:absolute;inset:0;background:rgba(25,31,40,.42);z-index:30;align-items:flex-end}.phone-modal.show{display:flex}
+.phone-sheet{width:100%;max-height:72%;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:12px 18px 22px;box-shadow:0 -18px 50px rgba(15,23,42,.18)}
+.sheet-handle{width:38px;height:4px;border-radius:999px;background:#d1d6db;margin:0 auto 16px}.sheet-title{font-size:20px;line-height:29px;font-weight:700}.sheet-meta{margin-top:8px;font-size:14px;line-height:21px;color:var(--sub)}.sheet-close{width:100%;height:48px;border:0;border-radius:14px;background:var(--gray100);font-size:15px;font-weight:700;margin-top:18px;cursor:pointer}
+@media(max-width:820px){.flow{grid-template-columns:1fr}.phone{width:360px}.scenario-switch{width:min(720px,calc(100vw - 24px))}}
+
+/* v7 refinements */
+.field > .label + .input{margin-top:8px}
+.meeting-type-selector{gap:10px}
+.meeting-type{min-height:76px;display:grid;grid-template-columns:24px 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:14px 15px;text-align:left}
+.meeting-type-icon{display:none!important}
+.meeting-type-radio{grid-row:1 / span 2;width:20px;height:20px;border:2px solid var(--grey300,#d1d6db);border-radius:50%;display:grid;place-items:center;flex:0 0 20px}
+.meeting-type-radio::after{content:"";width:10px;height:10px;border-radius:50%;background:transparent}
+.meeting-type.on .meeting-type-radio{border-color:var(--blue)}
+.meeting-type.on .meeting-type-radio::after{background:var(--blue)}
+.meeting-type strong{grid-column:2;font-size:16px;line-height:1.35}
+.meeting-type small{grid-column:2;margin-top:2px;font-size:12px;line-height:1.35}
+
+/* Calendar detail navigation */
+.sheet-calendar{width:100%;height:48px;border:0;border-radius:14px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;margin-top:18px;cursor:pointer}
+.sheet-close{margin-top:8px!important}
+.calendar-screen{padding-bottom:72px}
+.calendar-date-head{font-size:13px;color:var(--sub);font-weight:600;margin:14px 3px 8px}
+.calendar-event{display:flex;gap:12px;padding:14px 15px;border-top:1px solid var(--line);align-items:flex-start}
+.calendar-event:first-child{border-top:0}
+.calendar-event-time{width:56px;font-size:12px;line-height:18px;color:var(--sub)}
+.calendar-event-main{flex:1}
+.calendar-event-main strong{display:block;font-size:15px;line-height:22px}
+.calendar-event-main span{display:block;margin-top:3px;font-size:12px;line-height:18px;color:var(--sub)}
+</style>
+<style>
+/* Presentation layout fix: keep the meeting-request scenario in one horizontal frame. */
+.page{height:100vh;min-height:0;overflow:hidden}
+.flow:not(.first-use){
+  width:940px;
+  max-width:none;
+  grid-template-columns:360px 64px 360px;
+  gap:18px;
+  transform-origin:top center;
+}
+.flow:not(.first-use) #senderColumn,
+.flow:not(.first-use) #receiverColumn{width:360px}
+.flow:not(.first-use) .arrowcol{height:700px;flex-direction:column}
+.flow:not(.first-use) .arrow{transform:none}
+
+/* Scale the entire two-phone story instead of stacking the phones. */
+@media (max-width:1000px), (max-height:790px){
+  .flow:not(.first-use){zoom:.88}
+}
+@media (max-width:840px), (max-height:700px){
+  .flow:not(.first-use){zoom:.72}
+}
+@media (max-width:690px){
+  .flow:not(.first-use){zoom:.58}
+}
+@media (max-width:560px){
+  .flow:not(.first-use){zoom:.48}
+}
+
+/* First-use mode remains a single centered phone. */
+.flow.first-use{width:430px;max-width:calc(100vw - 24px);zoom:1}
+@media (max-height:790px){.flow.first-use{zoom:.9}}
+@media (max-width:460px){.flow.first-use{zoom:.88}}
+</style><style>
+/* Structural layout hardening */
+html,body{height:100%;overflow:hidden}
+.page{height:100vh;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.scenario-switch{flex:0 0 56px;margin-bottom:10px}
+#scenarioFlow{flex:1;min-height:0;margin:0 auto;align-items:start}
+#scenarioFlow:not(.first-use){display:grid!important;grid-template-columns:360px 64px 360px!important;gap:18px!important;width:820px!important;max-width:none!important;transform-origin:top center}
+#scenarioFlow:not(.first-use)>#senderColumn,#scenarioFlow:not(.first-use)>#arrowColumn,#scenarioFlow:not(.first-use)>#receiverColumn{display:block!important;min-width:0}
+#senderColumn>.phone,#receiverColumn>.phone{position:relative!important;overflow:hidden!important}
+#senderColumn>.phone>.bottom{position:absolute!important;left:0!important;right:0!important;bottom:0!important;z-index:20!important}
+#senderColumn>.phone>.body{height:calc(100% - 82px)!important;overflow:auto!important;padding-bottom:92px!important}
+#senderColumn>.phone>.step + .body{height:calc(100% - 95px)!important}
+#scenarioFlow.first-use{display:block!important;width:360px!important;max-width:none!important;margin:0 auto!important}
+#scenarioFlow.first-use #receiverColumn{display:block!important;width:360px!important}
+#scenarioFlow.first-use #senderColumn,#scenarioFlow.first-use #arrowColumn{display:none!important}
+@media (max-width:900px),(max-height:780px){#scenarioFlow:not(.first-use){transform:scale(.86);margin-top:0}}
+@media (max-width:760px),(max-height:680px){#scenarioFlow:not(.first-use){transform:scale(.72)}}
+@media (max-width:620px){#scenarioFlow:not(.first-use){transform:scale(.58)}}
+
+/* Final layout and onboarding refinements */
+#senderColumn .home-bottom-nav{z-index:12}
+#senderColumn:has(#s0.show)>.phone>.bottom{display:none!important}
+#senderColumn .body{padding-bottom:74px}
+.receiver-power-off{position:absolute;inset:0;background:#05070b;z-index:40;display:none;align-items:center;justify-content:center;color:#fff}
+.receiver-power-off.show{display:flex}
+.receiver-power-off .lock-screen{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,#18202d 0,#090d14 42%,#030507 100%)}
+.receiver-power-off .lock-time{font-size:54px;line-height:1;font-weight:700;letter-spacing:-2px}
+.receiver-power-off .lock-date{font-size:14px;color:#cbd5e1;margin-top:10px}
+.receiver-power-off .lock-hint{position:absolute;bottom:34px;font-size:12px;color:#7b8797}
+.onboard-close{display:none;position:absolute;top:12px;right:12px;z-index:55;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#4e5968;font-size:25px;line-height:40px;cursor:pointer}
+#scenarioFlow.first-use #receiverColumn .role{display:none}
+#scenarioFlow.first-use #receiverColumn .status,
+#scenarioFlow.first-use #receiverColumn .appbar{display:none}
+#scenarioFlow.first-use #receiverColumn .phone:before{display:none}
+#scenarioFlow.first-use #receiverColumn .body{height:100%;padding-bottom:0}
+#scenarioFlow.first-use #receiverColumn .phone{background:#fff}
+#scenarioFlow.first-use .onboard-close{display:block}
+#scenarioFlow.first-use #r0{height:100%;position:relative;padding-top:46px}
+#scenarioFlow.first-use .onboard-panel{height:100%;position:relative}
+#scenarioFlow.first-use .head{padding-top:28px}
+#scenarioFlow.first-use .onboarding-visual{padding-top:18px}
+#scenarioFlow.first-use .visual-card{border:0;box-shadow:none;background:transparent;padding:8px 18px}
+#scenarioFlow.first-use .visual-icon{display:none!important}
+#scenarioFlow.first-use .onboard-bottom{z-index:20}
+</style>
+<style id="latest-overrides">
+/* Latest layout refinements */
+.flow:not(.first-use) #senderColumn,.flow:not(.first-use) #receiverColumn{display:flex!important;flex-direction:column;align-items:center}
+.flow:not(.first-use) #senderColumn>.role,.flow:not(.first-use) #receiverColumn>.role{order:2;margin:10px 0 0;font-size:15px;font-weight:700;color:var(--blue2)}
+.flow:not(.first-use) #senderColumn>.phone,.flow:not(.first-use) #receiverColumn>.phone{order:1}
+#arrowColumn{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease;gap:0}
+#arrowColumn.visible{visibility:visible;opacity:1}
+#arrowColumn .flownote{display:none!important}
+#arrowColumn .arrow{font-size:52px}
+#scenarioFlow.first-use .onboard-panel .head{height:calc(100% - 92px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px 26px 72px}
+#scenarioFlow.first-use .onboard-panel .head h2{font-size:28px;line-height:1.28;margin:0}
+#scenarioFlow.first-use .onboard-panel .head .desc{max-width:286px;margin-top:14px;text-align:center}
+#scenarioFlow.first-use .onboarding-visual{display:none!important}
+#scenarioFlow.first-use .onboard-dots{position:absolute;left:0;right:0;bottom:82px;margin:0}
+#scenarioFlow.first-use #onboardIntro .head,#scenarioFlow.first-use #calendarConnectPanel .head,#scenarioFlow.first-use #preferencePanel .head{height:auto;display:block;text-align:left;padding:28px 18px 8px}
+#scenarioFlow.first-use #onboardIntro .head .desc,#scenarioFlow.first-use #calendarConnectPanel .head .desc,#scenarioFlow.first-use #preferencePanel .head .desc{text-align:left;margin-top:8px;max-width:none}
+</style>
+<style id="role-position-fix">
+#scenarioFlow:not(.first-use)>#senderColumn,#scenarioFlow:not(.first-use)>#receiverColumn{display:flex!important;flex-direction:column!important;align-items:center!important}
+#scenarioFlow:not(.first-use)>#senderColumn>.phone,#scenarioFlow:not(.first-use)>#receiverColumn>.phone{order:1!important}
+#scenarioFlow:not(.first-use)>#senderColumn>.role,#scenarioFlow:not(.first-use)>#receiverColumn>.role{order:2!important;margin:10px 0 0!important;text-align:center!important}
+</style>
+<style id="layout-final-fix">
+/* Definitive two-phone presentation layout */
+html,body{width:100%;height:100%;overflow:hidden}
+.page{width:100%;height:100vh;padding:12px 16px 14px;display:flex;flex-direction:column;overflow:hidden}
+.scenario-switch{flex:0 0 56px;margin:0 auto 10px}
+#scenarioFlow{position:relative;flex:1;min-height:0;margin:0 auto;transform-origin:top center}
+#scenarioFlow:not(.first-use){display:grid!important;grid-template-columns:360px 72px 360px!important;column-gap:22px!important;align-items:start!important;width:836px!important;height:730px!important;max-width:none!important}
+#scenarioFlow:not(.first-use)>#senderColumn,#scenarioFlow:not(.first-use)>#receiverColumn{position:relative!important;width:360px!important;height:730px!important;display:flex!important;flex-direction:column!important;align-items:center!important;transform:none!important}
+#scenarioFlow:not(.first-use)>#arrowColumn{position:relative!important;width:72px!important;height:700px!important;display:flex!important;align-items:center!important;justify-content:center!important;transform:none!important}
+#scenarioFlow:not(.first-use) .phone{flex:0 0 700px;width:360px!important;height:700px!important;margin:0!important;transform:none!important}
+#scenarioFlow:not(.first-use) .role{flex:0 0 auto;order:2!important;margin:9px 0 0!important;font-size:15px!important;line-height:21px!important}
+#scenarioFlow:not(.first-use) .phone{order:1!important}
+#arrowColumn{visibility:hidden;opacity:0;pointer-events:none}
+#arrowColumn.visible{visibility:visible;opacity:1}
+#arrowColumn .arrow{font-size:48px;line-height:1;color:var(--blue);transform:none!important}
+#scenarioFlow.first-use{display:block!important;width:360px!important;height:700px!important;margin:0 auto!important}
+#scenarioFlow.first-use #receiverColumn{width:360px!important;height:700px!important;display:block!important}
+#scenarioFlow.first-use #senderColumn,#scenarioFlow.first-use #arrowColumn{display:none!important}
+@media (max-width:900px),(max-height:790px){#scenarioFlow:not(.first-use){transform:scale(.88)}}
+@media (max-width:780px),(max-height:700px){#scenarioFlow:not(.first-use){transform:scale(.74)}}
+@media (max-width:650px){#scenarioFlow:not(.first-use){transform:scale(.60)}}
+@media (max-width:530px){#scenarioFlow:not(.first-use){transform:scale(.48)}}
+@media (max-height:790px){#scenarioFlow.first-use{transform:scale(.9);transform-origin:top center}}
+</style>
+<style id="hardcoded-phone-regions">
+/* Hard-coded presentation regions: sender / transfer / receiver never overlap. */
+#scenarioFlow:not(.first-use){
+  position:relative!important;
+  display:block!important;
+  width:860px!important;
+  height:732px!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  transform-origin:top center!important;
+}
+#scenarioFlow:not(.first-use)>#senderColumn{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:360px!important;
+  height:732px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  z-index:2!important;
+}
+#scenarioFlow:not(.first-use)>#arrowColumn{
+  position:absolute!important;
+  left:390px!important;
+  top:0!important;
+  width:80px!important;
+  height:700px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  z-index:1!important;
+}
+#scenarioFlow:not(.first-use)>#receiverColumn{
+  position:absolute!important;
+  left:500px!important;
+  top:0!important;
+  width:360px!important;
+  height:732px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  z-index:2!important;
+}
+#scenarioFlow:not(.first-use)>#senderColumn>.phone,
+#scenarioFlow:not(.first-use)>#receiverColumn>.phone{
+  position:relative!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  width:360px!important;
+  height:700px!important;
+  min-width:360px!important;
+  max-width:360px!important;
+  flex:0 0 700px!important;
+  margin:0!important;
+  transform:none!important;
+}
+#scenarioFlow:not(.first-use)>#senderColumn>.role,
+#scenarioFlow:not(.first-use)>#receiverColumn>.role{
+  position:static!important;
+  order:2!important;
+  width:360px!important;
+  height:23px!important;
+  margin:9px 0 0!important;
+  text-align:center!important;
+}
+#scenarioFlow:not(.first-use)>#senderColumn>.phone,
+#scenarioFlow:not(.first-use)>#receiverColumn>.phone{order:1!important}
+/* Scale the complete fixed canvas as one unit, never reflow into columns. */
+@media (max-width:930px),(max-height:805px){#scenarioFlow:not(.first-use){transform:scale(.86)!important}}
+@media (max-width:790px),(max-height:700px){#scenarioFlow:not(.first-use){transform:scale(.72)!important}}
+@media (max-width:660px),(max-height:610px){#scenarioFlow:not(.first-use){transform:scale(.58)!important}}
+@media (max-width:540px){#scenarioFlow:not(.first-use){transform:scale(.46)!important}}
+</style>
+<style id="onboard-wordmark-style">
+.onboard-wordmark{display:none;position:absolute;left:24px;top:22px;z-index:32;font-size:16px;line-height:24px;font-weight:700;letter-spacing:-.2px;color:var(--text)}
+#scenarioFlow.first-use .onboard-wordmark{display:block}
+</style>
+<style id="preference-and-home-header-fix">
+/* First-use: keep the preference CTA fixed to the phone bottom, not over the last option */
+#scenarioFlow.first-use #preferencePanel{height:100%;position:relative;padding-bottom:78px;overflow:hidden}
+#scenarioFlow.first-use #preferencePanel>.head{position:relative;z-index:1;background:#fff}
+#scenarioFlow.first-use #preferencePanel>.section{height:calc(100% - 150px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:108px;scrollbar-width:none}
+#scenarioFlow.first-use #preferencePanel>.section::-webkit-scrollbar{display:none}
+#scenarioFlow.first-use #preferencePanel>.onboard-bottom{position:absolute!important;left:0;right:0;bottom:0;z-index:30;padding:12px 15px 14px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff 28%,#fff)}
+
+/* Hide app chrome only during onboarding/setup. Restore the normal header on the home screen. */
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .status{display:flex!important}
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .appbar{display:flex!important}
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .phone:before{display:block!important}
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .body{height:calc(100% - 82px)!important;padding-bottom:72px!important;overflow-y:auto!important}
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .onboard-wordmark,
+#scenarioFlow.first-use #receiverColumn:has(#r1.show) .onboard-close{display:none!important}
+
+/* Keep Quickly wordmark and close button limited to the first-use onboarding screen. */
+#scenarioFlow.first-use #receiverColumn:not(:has(#r0.show)) .onboard-wordmark,
+#scenarioFlow.first-use #receiverColumn:not(:has(#r0.show)) .onboard-close{display:none!important}
+</style>
+<style id="receiver-state-class-fix">
+#scenarioFlow.first-use #receiverColumn.home-active .status{display:flex!important}
+#scenarioFlow.first-use #receiverColumn.home-active .appbar{display:flex!important}
+#scenarioFlow.first-use #receiverColumn.home-active .phone:before{display:block!important}
+#scenarioFlow.first-use #receiverColumn.home-active .body{height:calc(100% - 82px)!important;padding-bottom:72px!important;overflow-y:auto!important}
+#scenarioFlow.first-use #receiverColumn.home-active .onboard-wordmark,
+#scenarioFlow.first-use #receiverColumn.home-active .onboard-close{display:none!important}
+#scenarioFlow.first-use #receiverColumn.onboarding-active .onboard-wordmark,
+#scenarioFlow.first-use #receiverColumn.onboarding-active .onboard-close{display:block!important}
+</style>
+<style id="v6-refinements">
+.screen .eyebrow{display:none!important}
+.meeting-type-selector{display:grid;grid-template-columns:1fr 1fr;gap:10px}.meeting-type{min-height:88px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:13px;text-align:left;cursor:pointer;color:var(--text)}.meeting-type.on{border-color:var(--blue);background:var(--blue50);box-shadow:0 0 0 1px var(--blue)}.meeting-type-icon{display:block;font-size:19px;color:var(--blue);margin-bottom:6px}.meeting-type strong{display:block;font-size:16px}.meeting-type small{display:block;margin-top:4px;color:var(--sub);font-size:11px;line-height:1.35}.room-choice-tabs{margin:0}.online-panel{display:none}.online-panel.show{display:block}.room-panel{display:none}.room-panel.show{display:block}
+.person .seg{background:transparent;padding:0;gap:5px}.person .seg button{min-width:42px;border-radius:999px;padding:7px 10px;background:var(--gray100);color:var(--muted);box-shadow:none}.person .seg button:first-child.on{background:var(--blue);color:#fff}.person .seg button:last-child.on{background:#dfe3e8;color:#4e5968}.person .seg button.on{box-shadow:none}
+.direct-panel{padding-top:12px}.direct-picker-block{padding:14px 0;border-bottom:1px solid var(--line)}.direct-picker-block:first-child{padding-top:4px}.picker-label{display:flex;align-items:center;gap:8px;margin-bottom:12px}.picker-label>span{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:white;font-size:12px;font-weight:800}.picker-label strong{font-size:16px}.date-choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.date-choice{height:62px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--sub);cursor:pointer}.date-choice b{display:block;font-size:18px;color:var(--text)}.date-choice span{display:block;font-size:12px;margin-top:2px}.date-choice.on{border-color:var(--blue);background:var(--blue50)}.date-choice.on b,.date-choice.on span{color:var(--blue2)}.time-choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.direct-time{height:43px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:800;color:#4e5968;cursor:pointer}.direct-time.on{border-color:var(--blue);background:var(--blue50);color:var(--blue2)}.direct-summary{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;margin-top:12px;border-radius:14px;background:var(--gray50);border:1px solid var(--line)}.direct-summary span{font-size:12px;color:var(--muted)}.direct-summary strong{font-size:14px}.request-edit-section{padding-top:0}.edit-request-btn{height:48px;background:var(--gray100)!important;color:var(--text)!important}
+</style><style id="v8-refinements">
+/* v8: refined interaction and layout */
+.phone:before{display:none!important}
+.phone{border-radius:30px!important;border-width:7px!important}
+.status{padding-top:8px!important}
+
+/* 2px selectable borders */
+.chip,.meeting-type,.room,.candidate-card,.alt-candidate,.date-choice,.direct-time,.pref-chip,.mode-tabs button,.calendar-day{border:2px solid transparent!important}
+.input{border-width:2px!important}
+.chip{border-color:var(--gray100)!important}.chip:hover{border-color:var(--blue)!important}.chip.on{border-color:var(--blue)!important}
+.meeting-type{border-color:var(--line)!important}.meeting-type:hover,.meeting-type.on{border-color:var(--blue)!important}
+.room{border:2px solid transparent!important}.room:hover,.room.selected{border-color:var(--blue)!important}
+.pref-chip{border-color:var(--gray100)!important}.pref-chip:hover,.pref-chip.on{border-color:var(--blue)!important}
+.mode-tabs button:hover,.mode-tabs button.on{border-color:var(--blue)!important}
+.direct-time{border-color:var(--line)!important}.direct-time:hover,.direct-time.on{border-color:var(--blue)!important}
+
+/* Recommendation cards */
+.candidate-list{display:flex;flex-direction:column;gap:10px;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+.candidate-card{border-color:var(--line)!important;border-radius:17px;background:#fff;padding:15px!important;box-shadow:0 5px 16px rgba(15,23,42,.05)}
+.candidate-card.selected{border-color:var(--blue)!important;background:var(--blue50)!important}
+.candidate-card:first-child{border-top:2px solid var(--line)!important}
+
+/* Direct calendar */
+.calendar-picker{border:1px solid var(--line);border-radius:18px;padding:12px;background:#fff}
+.calendar-head{display:grid;grid-template-columns:36px 1fr 36px;align-items:center;margin-bottom:10px}
+.calendar-head strong{text-align:center;font-size:15px}
+.calendar-head button{width:34px;height:34px;border:0;border-radius:10px;background:transparent;font-size:23px;color:var(--sub);cursor:pointer}
+.calendar-head button:hover{background:var(--gray100)}
+.calendar-week,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.calendar-week span{text-align:center;font-size:11px;color:var(--muted);padding:5px 0}
+.calendar-day{height:34px;border-radius:10px;background:#fff;color:var(--text);font-size:12px;cursor:pointer}
+.calendar-day.available{border-color:var(--line)!important}
+.calendar-day.available:hover,.calendar-day.on{border-color:var(--blue)!important;background:var(--blue50);color:var(--blue2);font-weight:800}
+.calendar-day.disabled{color:#c8ced6;background:#fafbfc;cursor:not-allowed}
+.calendar-day.empty{visibility:hidden}
+.required-label{justify-content:space-between}.required-mark{display:inline-flex;margin-left:7px;padding:3px 7px;border-radius:999px;background:#feecee;color:var(--red);font-size:10px;font-weight:800;vertical-align:middle}
+.validation-text{display:none;margin-top:8px;color:var(--red);font-size:12px}.validation-text.show{display:block}
+.direct-summary{border-width:1px!important}
+
+/* Request primary + secondary stacked inside phone bottom */
+#senderColumn .bottom{display:flex;flex-direction:column;gap:8px;padding-top:14px!important}
+#senderColumn .bottom .edit-request-btn{display:none;height:46px!important;order:2}
+#senderColumn.request-preview-active .body{padding-bottom:150px!important}
+#senderColumn.request-preview-active .bottom .edit-request-btn{display:block}
+
+/* First-use preferences */
+.preference-block>strong{display:inline-block}
+.preference-validation{display:none;margin:10px 17px 90px;color:var(--red);font-size:12px}.preference-validation.show{display:block}
+#scenarioFlow.first-use #receiverColumn.setup-phase .status,#scenarioFlow.first-use #receiverColumn.setup-phase .appbar{display:flex!important}
+#scenarioFlow.first-use #receiverColumn.setup-phase .onboard-wordmark,#scenarioFlow.first-use #receiverColumn.setup-phase .onboard-close{display:none!important}
+#scenarioFlow.first-use #receiverColumn.setup-phase .body{height:calc(100% - 82px)!important}
+
+/* Floating BottomCTA.Double */
+#r3,#r5,#r4{padding-bottom:96px}
+.bottom-cta-double,.bottom-cta-single{position:absolute;left:0;right:0;bottom:0;z-index:25;padding:14px 15px max(14px,env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(255,255,255,0),#fff 22%,#fff);display:grid;gap:8px}
+.bottom-cta-double{grid-template-columns:1fr 1.35fr}
+.bottom-cta-double button,.bottom-cta-single button{height:54px;border:0;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer}
+.cta-danger-weak{background:#feecee;color:var(--red)}
+.cta-danger-weak:hover{background:#fddfe2}
+.cta-primary{background:var(--blue);color:#fff}
+.cta-primary:hover{background:var(--blue2)}
+
+/* Setup phase is no longer fullscreen modal */
+#scenarioFlow.first-use #receiverColumn.setup-phase .onboard-panel .head{height:auto!important;display:block!important;text-align:left!important;padding:13px 18px 8px!important}
+#scenarioFlow.first-use #receiverColumn.setup-phase .onboard-panel .head .desc{text-align:left!important;margin-top:8px!important;max-width:none!important}
+</style>
+<style id="canvas-share-overrides">
+/* Submission canvas: preserve the current prototype as one fixed web artboard. */
+html,body{width:100%;height:100%;margin:0;overflow:hidden!important;background:#eef1f5!important}
+body{position:relative}
+.canvas-page{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:1920px!important;
+  height:1080px!important;
+  min-height:1080px!important;
+  padding:18px 24px 20px!important;
+  overflow:hidden!important;
+  transform-origin:center center!important;
+  background:linear-gradient(180deg,#f8fbff 0%,#f3f5f8 100%)!important;
+}
+.canvas-page #scenarioFlow:not(.first-use),
+.canvas-page #scenarioFlow.first-use{
+  zoom:1!important;
+  transform:none!important;
+}
+.canvas-page #scenarioFlow:not(.first-use){margin-left:auto!important;margin-right:auto!important}
+
+/* Restore 1px or borderless controls. Only input fields and card-like selectors use 2px. */
+.canvas-page .input{border-width:2px!important}
+.canvas-page .meeting-type,
+.canvas-page .room,
+.canvas-page .candidate-card,
+.canvas-page .alt-candidate,
+.canvas-page .date-choice{border-width:2px!important}
+
+.canvas-page .chip,
+.canvas-page .pref-chip,
+.canvas-page .direct-time,
+.canvas-page .calendar-day{border-width:1px!important}
+.canvas-page .mode-tabs button,
+.canvas-page .seg button,
+.canvas-page .scenario-switch button{border:0!important}
+
+.canvas-page .chip:hover,
+.canvas-page .pref-chip:hover,
+.canvas-page .direct-time:hover,
+.canvas-page .calendar-day.available:hover{border-width:1px!important}
+.canvas-page .mode-tabs button:hover,
+.canvas-page .mode-tabs button.on,
+.canvas-page .seg button:hover,
+.canvas-page .seg button.on,
+.canvas-page .scenario-switch button:hover,
+.canvas-page .scenario-switch button.active{border:0!important}
+</style>
+
+<style id="tds-final-interaction-overrides">
+/* Final TDS Mobile interaction treatment
+   - no border growth on hover
+   - selected state uses background/color
+   - inputs alone use focus border and ring */
+.canvas-page{padding:24px 32px 28px!important}
+
+/* Inputs: stable 1px resting border, blue focus state. */
+.canvas-page .input,
+.canvas-page .direct-select select{
+  border:1px solid var(--line)!important;
+  transition:border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+.canvas-page .input:hover,
+.canvas-page .direct-select select:hover{border-color:#b0b8c1!important}
+.canvas-page .input:focus,
+.canvas-page .direct-select select:focus{
+  border-color:var(--blue)!important;
+  box-shadow:0 0 0 3px rgba(49,130,246,.12)!important;
+  outline:0!important;
+}
+
+/* Card-like selectors: fixed 1px border, soft background on hover, blue selection. */
+.canvas-page .meeting-type,
+.canvas-page .room,
+.canvas-page .candidate-card,
+.canvas-page .alt-candidate,
+.canvas-page .date-choice{
+  border-width:1px!important;
+  border-color:var(--line)!important;
+  transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease!important;
+}
+.canvas-page .meeting-type:hover,
+.canvas-page .room:hover,
+.canvas-page .candidate-card:hover,
+.canvas-page .alt-candidate:hover,
+.canvas-page .date-choice:hover{
+  border-color:var(--line)!important;
+  background:var(--gray50)!important;
+}
+.canvas-page .meeting-type.on,
+.canvas-page .room.selected,
+.canvas-page .candidate-card.selected,
+.canvas-page .alt-candidate.selected,
+.canvas-page .date-choice.on{
+  border-color:var(--blue)!important;
+  background:var(--blue50)!important;
+  box-shadow:none!important;
+}
+
+/* Chips, segmented controls, tabs, time/date buttons: no hover border changes. */
+.canvas-page .chip,
+.canvas-page .pref-chip,
+.canvas-page .direct-time,
+.canvas-page .calendar-day,
+.canvas-page .mode-tabs button,
+.canvas-page .seg button,
+.canvas-page .scenario-switch button{
+  border-width:0!important;
+  box-shadow:none;
+  transition:background-color .16s ease,color .16s ease,box-shadow .16s ease!important;
+}
+.canvas-page .chip:hover,
+.canvas-page .pref-chip:hover,
+.canvas-page .direct-time:hover,
+.canvas-page .calendar-day.available:hover,
+.canvas-page .mode-tabs button:hover,
+.canvas-page .seg button:hover,
+.canvas-page .scenario-switch button:hover{
+  border:0!important;
+  background:var(--gray100)!important;
+}
+.canvas-page .chip.on,
+.canvas-page .pref-chip.on,
+.canvas-page .direct-time.on,
+.canvas-page .calendar-day.on{
+  border:0!important;
+  background:var(--blue50)!important;
+  color:var(--blue2)!important;
+}
+.canvas-page .mode-tabs button.on,
+.canvas-page .seg button.on,
+.canvas-page .scenario-switch button.active{
+  border:0!important;
+  background:#fff!important;
+  color:var(--text)!important;
+  box-shadow:0 2px 8px rgba(15,23,42,.08)!important;
+}
+
+/* Clear icon buttons follow TDS mobile pressed feedback. */
+.canvas-page .tds-icon-button{border:0!important;background:transparent!important}
+.canvas-page .tds-icon-button:hover{background:var(--gray100)!important}
+.canvas-page .tds-icon-button:active{background:#e5e8eb!important}
+</style>
+
+<style id="meeting-location-fixes">
+/* Meeting location interaction fixes */
+#meetingType{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#meetingType .meeting-type{position:relative;z-index:1;pointer-events:auto}
+#roomChoiceMode{position:relative;z-index:1}
+#roomChoiceMode button{pointer-events:auto}
+#autoRoomPanel .card,#fixedRoomPanel .card{overflow:visible;padding:2px;background:transparent;border:0;box-shadow:none}
+#autoRoomPanel .room,#fixedRoomPanel .room{margin-bottom:8px;border:1px solid var(--line)!important;border-radius:16px;background:#fff}
+#autoRoomPanel .room:last-child,#fixedRoomPanel .room:last-child{margin-bottom:0}
+#autoRoomPanel .room.selected,#fixedRoomPanel .room.selected{border-color:var(--blue)!important;background:var(--blue50)}
+#autoRoomPanel .room:hover,#fixedRoomPanel .room:hover{background:var(--gray50)}
+#autoRoomPanel .room.selected:hover,#fixedRoomPanel .room.selected:hover{background:var(--blue50)}
+</style>
+</head>
+<body>
+<div class="page canvas-page">
+<div aria-label="프로토타입 시나리오" class="scenario-switch" role="tablist">
+<button aria-selected="true" class="active" id="meetingScenarioTab" role="tab">미팅 요청 시</button>
+<button aria-selected="false" id="firstUseScenarioTab" role="tab">사용자 첫 사용 시</button>
+</div>
+<div class="flow" id="scenarioFlow">
+<div id="senderColumn"><div class="phone">
+<div class="status"><span>9:41</span><span>5G 92%</span></div><div class="appbar"><div class="brand wordmark">Quickly</div><div class="app-actions"><button aria-label="알림 열기" class="tds-icon-button has-dot"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg></button><button aria-label="더보기" class="tds-icon-button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg></button></div></div>
+<div class="step" id="steps" style="display:none"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+<div class="body">
+<section class="screen show" id="s0"><div class="sender-home"><div class="sender-home-top"><div><span>신호수 님, 안녕하세요</span><h2>오늘 미팅과 요청을<br/>한눈에 확인해요</h2></div><button class="home-profile">신</button></div><button class="fab-create" id="createMeetingBtn">+ 회의 일정 잡기</button><div class="home-summary"><div><span>보낸 요청</span><strong>2</strong></div><div><span>받은 요청</span><strong>1</strong></div><div><span>이번 주 미팅</span><strong>5</strong></div></div><div class="home-list-title">진행 중인 미팅 요청</div><div class="card"><div class="meeting-card" data-detail-meta="7월 17일 목요일 · 프로젝트룸 A · 응답 4/6" data-detail-title="제품 정책 리뷰"><div class="meeting-date"><b>17</b><span>목</span></div><div class="meeting-copy"><strong>제품 정책 리뷰</strong><span>응답 4/6 · 프로젝트룸 A</span></div><span class="status-pill action">응답 대기</span></div><div class="meeting-card" data-detail-meta="7월 18일 금요일 오후 2:00 · 미팅룸 B · 확정됨" data-detail-title="사업팀 주간회의"><div class="meeting-date"><b>18</b><span>금</span></div><div class="meeting-copy"><strong>사업팀 주간회의</strong><span>오후 2:00 · 미팅룸 B</span></div><span class="status-pill">확정됨</span></div></div><div class="home-list-title">받은 요청</div><div class="card"><div class="meeting-card" data-detail-meta="7월 19일 월요일 · 김토스 님 외 7명 · 응답 필요" data-detail-title="3분기 캠페인 킥오프"><div class="meeting-date"><b>19</b><span>월</span></div><div class="meeting-copy"><strong>3분기 캠페인 킥오프</strong><span>김토스 님 외 7명</span></div><span class="status-pill action">응답 필요</span></div></div></div><div class="home-bottom-nav"><button class="active"><span class="nav-icon home"><svg viewbox="0 0 24 24"><path class="home-fill" d="M3.5 10.5 12 3l8.5 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5v-6h-4v6H5a1.5 1.5 0 0 1-1.5-1.5z"></path></svg></span>홈</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><rect height="15" rx="2" width="16" x="4" y="5"></rect><path d="M8 3v4M16 3v4M4 9h16"></path><path d="M9 13h6M9 16h4"></path></svg></span>미팅</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>내 일정</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1-2.8 2.8-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.6v.2h-4v-.2A1.8 1.8 0 0 0 8.8 19.4a1.8 1.8 0 0 0-2 .4l-.1.1-2.8-2.8.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.8 14H2.6v-4h.2A1.8 1.8 0 0 0 4.4 8.8a1.8 1.8 0 0 0-.4-2l-.1-.1 2.8-2.8.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 2.8v-.2h4v.2a1.8 1.8 0 0 0 1.1 1.6 1.8 1.8 0 0 0 2-.4l.1-.1 2.8 2.8-.1.1a1.8 1.8 0 0 0-.4 2A1.8 1.8 0 0 0 21.2 10h.2v4h-.2A1.8 1.8 0 0 0 19.4 15z"></path></svg></span>설정</button></div></section><section class="screen" id="s1"><div class="head"><h2>어떤 회의를<br/>잡을까요?</h2><div class="desc">회의명과 필요한 시간을 입력해 주세요.</div></div><div class="section"><div class="card"><div class="field"><div class="label">회의명</div><input class="input" id="meetingName" value="디자인 리뷰"/></div><div class="field"><div class="label">회의 시간</div><div class="chips" id="duration"><button class="chip">30분</button><button class="chip on">1시간</button><button class="chip">1시간 30분</button><button class="chip">2시간</button></div></div><div class="field"><div class="label">조율 기간</div><div class="chips" id="range"><button class="chip on" data-days="7">1주일</button><button class="chip" data-days="14">2주일</button><button class="chip" data-days="30">한 달</button></div></div></div></div></section>
+<section class="screen" id="s2">
+<div class="head"><h2>어디에서<br/>만날까요?</h2><div class="desc">먼저 대면 또는 비대면을 선택해 주세요.</div></div>
+<div class="section">
+<div class="title">회의 방식</div>
+<div class="meeting-type-selector" id="meetingType">
+<button aria-checked="true" class="meeting-type on" data-type="offline" role="radio"><span aria-hidden="true" class="meeting-type-radio"></span><strong>대면</strong><small>사내 회의실에서 진행</small></button>
+<button aria-checked="false" class="meeting-type" data-type="online" role="radio"><span aria-hidden="true" class="meeting-type-radio"></span><strong>비대면</strong><small>Google Meet으로 진행</small></button>
+</div>
+</div>
+<div id="offlineOptions">
+<div class="section">
+<div class="title">회의실 선택 방식</div>
+<div class="mode-tabs room-choice-tabs" id="roomChoiceMode">
+<button class="on" data-mode="auto">자동 추천</button>
+<button data-mode="fixed">직접 선택</button>
+</div>
+</div>
+<div class="section room-panel show" id="autoRoomPanel">
+<div class="title">추천 회의실</div>
+<div class="card">
+<div class="room selected" data-room="미팅룸 B"><div><strong>미팅룸 B</strong><span>6인 · 모니터 · 화이트보드</span></div><div class="roomstate">1순위</div></div>
+<div class="room" data-room="프로젝트룸 A"><div><strong>프로젝트룸 A</strong><span>8인 · 대형 디스플레이</span></div><div class="roomstate">2순위</div></div>
+</div>
+<div class="info" style="margin-top:10px">선택한 시간에 비어 있는 회의실을 우선순위로 추천해요.</div>
+</div>
+<div class="section room-panel" id="fixedRoomPanel">
+<div class="title">회의실 목록</div>
+<div class="card">
+<div class="room selected" data-room="미팅룸 B"><div><strong>미팅룸 B</strong><span>6인 · 8층 · 모니터</span></div><div class="roomstate">선택됨</div></div>
+<div class="room" data-room="프로젝트룸 A"><div><strong>프로젝트룸 A</strong><span>8인 · 10층 · 대형 디스플레이</span></div><div class="roomstate">선택</div></div>
+<div class="room" data-room="화상회의실 2"><div><strong>화상회의실 2</strong><span>6인 · 7층 · 화상 장비</span></div><div class="roomstate">선택</div></div>
+</div>
+</div>
+</div>
+<div class="section online-panel" id="onlinePanel">
+<div class="card">
+<div class="field"><div class="label">온라인 회의 링크</div><div class="value">Google Meet 자동 생성</div></div>
+<div class="field"><div class="label">초대 방식</div><div class="value">캘린더 초대에 링크 포함</div></div>
+</div>
+<div class="info" style="margin-top:10px">참석 요청이 확정되면 모든 참석자의 캘린더에 링크를 추가해요.</div>
+</div>
+</section>
+<section class="screen" id="s3"><div class="head"><h2>함께할 동료를<br/>추가해 주세요</h2><div class="desc">동료를 추가한 뒤 필수·선택 참석을 선택해 주세요.</div></div><div class="section"><div class="directory"><div class="searchrow"><input autocomplete="off" class="input" id="personInput" placeholder="이름, 부서 또는 연락처 검색"/></div><div class="directory-results" id="directoryResults"></div></div><div style="height:9px"></div><div class="card" id="peopleList"><div class="empty" id="emptyPeople">아직 추가한 참석자가 없어요.<br/>이름 한 글자를 입력해 동료를 찾아보세요.</div></div></div><div class="section"><div class="title">최근 함께한 동료</div><div class="chips" id="suggestions"><button class="chip" data-name="김토스" data-team="프로덕트팀">김토스</button><button class="chip" data-name="이혜민" data-team="디자인팀">이혜민</button><button class="chip" data-name="박민지" data-team="사업팀">박민지</button></div></div></section>
+<section class="screen" id="s4"><div class="analysis-loading" id="analysisLoading"><div class="spinner"></div><div class="loading-title">동료의 일정과 선호를 확인하고 있어요</div><div class="loading-desc">회사 캘린더와 회의 선호, 비어 있는 회의실을 함께 살펴보고 있어요.</div><div class="loading-steps"><div class="loading-row active" id="loadCalendar"><span class="loading-dot"></span>동료 캘린더 확인<span class="state">확인 중</span></div><div class="loading-row" id="loadPreference"><span class="loading-dot"></span>회의 선호 분석<span class="state">대기</span></div><div class="loading-row" id="loadRoom"><span class="loading-dot"></span>회의실 가용성 조회<span class="state">대기</span></div></div></div><div class="analysis-result" id="analysisResult"><div class="head"><h2>동료의 일정과 선호를<br/>확인했어요</h2><div class="desc">연결된 회사 캘린더와 미리 저장한 회의 선호를 함께 반영했어요.</div></div><div class="section"><div class="info" id="analysisText">참석자를 추가하면 분석 결과를 보여드려요.</div></div><div class="section"><div class="title">반영한 정보</div><div class="card" id="analysisList"></div></div></div></section>
+<section class="screen" id="s5">
+<div class="head"><h2>언제 만날까요?</h2><div class="desc">추천 시간을 비교하거나 날짜와 시간을 직접 선택할 수 있어요.</div></div>
+<div class="section">
+<div class="mode-tabs"><button class="on" id="recommendMode">추천 시간</button><button id="directMode">직접 선택</button></div>
+<div id="recommendPanel">
+<div class="candidate-list" id="candidates">
+<div class="candidate selected candidate-card" data-detail="all" data-room="미팅룸 B" data-time="7월 16일 수요일 오후 2시"><div class="candtop"><div><div class="candtime">오후 2:00 – 3:00</div><div class="canddate">7월 16일 수요일</div></div><span class="badge">1순위</span></div><div class="reasons"><span class="reason">필수 전원 가능</span><span class="reason">비선호 없음</span><span class="reason">미팅룸 B 예약 가능</span></div><div class="candidate-actions"><button class="detail-btn">참석자 상세보기 ›</button></div></div>
+<div class="candidate candidate-card" data-detail="absent" data-room="프로젝트룸 A" data-time="7월 17일 목요일 오전 10시"><div class="candtop"><div><div class="candtime">오전 10:00 – 11:00</div><div class="canddate">7월 17일 목요일</div></div></div><div class="reasons"><span class="reason">필수 전원 가능</span><span class="reason warning">선택 1명 불참</span><span class="reason">프로젝트룸 A 가능</span></div><div class="candidate-actions"><button class="detail-btn">불참자 확인 ›</button></div></div>
+<div class="candidate candidate-card" data-detail="focus" data-room="화상회의실 2" data-time="7월 18일 금요일 오후 3시"><div class="candtop"><div><div class="candtime">오후 3:00 – 4:00</div><div class="canddate">7월 18일 금요일</div></div></div><div class="reasons"><span class="reason">전원 가능</span><span class="reason warning">2명 비선호</span><span class="reason">화상회의실 2 가능</span></div><div class="candidate-actions"><button class="detail-btn">비선호 사유 보기 ›</button></div></div>
+</div>
+</div>
+<div class="direct-panel" id="directPanel">
+<div class="direct-picker-block">
+<div class="picker-label"><strong>날짜 선택</strong></div>
+<div class="calendar-picker">
+<div class="calendar-head"><button aria-label="이전 달" id="calendarPrev" type="button">‹</button><strong id="calendarMonth">2026년 7월</strong><button aria-label="다음 달" id="calendarNext" type="button">›</button></div>
+<div class="calendar-week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+<div class="calendar-grid" id="directCalendar"></div>
+</div>
+<div class="validation-text" id="dateValidation">날짜를 선택해 주세요.</div>
+</div>
+<div class="direct-picker-block">
+<div class="picker-label required-label"><strong>시간 선택</strong><span class="required-mark">필수</span></div>
+<div class="time-choice-grid" id="directGrid"></div>
+<div class="validation-text" id="timeValidation">시간을 선택해 주세요.</div>
+</div>
+<div class="direct-summary" id="directSummaryBox" style="display:none"><span>선택한 일정</span><strong id="directSelectionText"></strong></div>
+</div>
+</div>
+</section>
+<section class="screen" id="s6"><div id="requestPreview">
+<div class="head"><h2>이 시간으로 참석을<br/>요청할까요?</h2><div class="desc">참석자에게 일정 후보를 보내고 참석 가능 여부를 확인해요.</div></div>
+<div class="section"><div class="card recommend"><div class="rec-title" id="finalTime">7월 16일 수요일 오후 2시</div><div class="rec-sub" id="finalMeta">디자인 리뷰 · 1시간<br/>추천 후보 시간<br/><b id="finalRoom">미팅룸 B</b></div></div></div>
+<div class="section request-edit-section"></div>
+</div><div id="pendingView" style="display:none"><div class="head"><h2>참석자들의 답변을<br/>기다리고 있어요</h2><div class="desc">필수 참석자의 응답이 모두 모이면 최종 일정을 확정할 수 있어요.</div></div><div class="section"><div class="card progress-card"><div class="progress-top"><div><div class="progress-title">디자인 리뷰</div><div class="progress-meta" id="pendingMeta">7월 16일 수요일 오후 2시<br/>미팅룸 B · 1시간</div></div><span class="member-badge wait" id="pendingBadge">응답 3/6</span></div><div class="progress-bar"><div class="progress-fill" id="pendingFill" style="width:50%"></div></div><div class="progress-caption" id="pendingCaption">필수 참석자 1명을 포함해 3명이 아직 응답하지 않았어요.</div></div></div><div class="section"><div class="title">참석 응답</div><div class="card"><div class="member-row"><div class="member-info"><div class="avatar">김</div><div><strong>김토스 · 필수</strong><div class="subtle">참석할게요</div></div></div><div class="member-badge done">수락</div></div><div class="member-row"><div class="member-info"><div class="avatar">이</div><div><strong>이혜민 · 필수</strong><div class="subtle">참석할게요</div></div></div><div class="member-badge done">수락</div></div><div class="member-row"><div class="member-info"><div class="avatar">박</div><div><strong>박민지 · 필수</strong><div class="subtle" id="pendingPersonText">응답을 기다리고 있어요</div></div></div><div class="member-badge wait" id="pendingPersonBadge">대기</div></div></div></div><div class="section"><div class="info" id="pendingInfo">필수 참석자의 응답이 모두 모이기 전에는 최종 확정할 수 없어요.</div></div></div><div id="recoordView" style="display:none"><div class="head"><h2>6명 모두 가능한<br/>다른 시간을 찾았어요</h2><div class="desc">불참 응답을 반영해 전원이 참석할 수 있는 후보만 다시 추천했어요.</div></div><div class="section"><div class="danger-info"><b>박민지 님이 현재 시간에 참석하기 어려워요.</b><br/>기존 고객 미팅과 겹쳐 다른 시간으로 다시 요청해야 해요.</div></div><div class="section"><div class="title">전원 참석 가능한 시간</div><div id="altCandidates"><div class="alt-candidate selected" data-room="프로젝트룸 A" data-time="7월 17일 목요일 오전 10시"><div class="alt-top"><div><div class="alt-time">오전 10:00 – 11:00</div><div class="alt-meta">7월 17일 목요일 · 프로젝트룸 A</div></div><span class="badge">1순위</span></div><div class="reasons"><span class="reason">6명 전원 가능</span><span class="reason">비선호 1명</span><span class="reason">회의실 확보 가능</span></div></div><div class="alt-candidate" data-room="미팅룸 B" data-time="7월 18일 금요일 오후 3시"><div class="alt-top"><div><div class="alt-time">오후 3:00 – 4:00</div><div class="alt-meta">7월 18일 금요일 · 미팅룸 B</div></div></div><div class="reasons"><span class="reason">6명 전원 가능</span><span class="reason warning">비선호 2명</span><span class="reason">회의실 확보 가능</span></div></div></div></div><div class="section"><div class="info">기존 회의 정보와 참석자는 유지하고, 변경된 시간만 다시 확인받아요.</div></div></div><div id="allAcceptedView" style="display:none"><div class="head"><h2>6명 모두 참석할 수<br/>있다고 답했어요</h2><div class="desc">이제 일정과 회의실을 최종 확정할 수 있어요.</div></div><div class="section"><div class="success-info"><b>변경된 시간으로 전원 수락했어요.</b><br/>캘린더 일정과 회의실 예약을 확정하고 참석자에게 알릴게요.</div></div><div class="section"><div class="card recommend"><div class="rec-title" id="acceptedTime">7월 17일 목요일 오전 10시</div><div class="rec-sub">디자인 리뷰 · 1시간<br/><b id="acceptedRoom">프로젝트룸 A</b></div></div></div></div></section>
+</div><div class="bottom"><button class="cta" id="nextBtn">다음</button><button class="cta secondary edit-request-btn" id="editRequestBtn" type="button">정보 수정하기</button></div></div>
+<div class="sheet-backdrop" id="detailSheet"><div class="sheet"><div class="sheet-handle"></div><h3 id="sheetTitle">참석자 상세</h3><p id="sheetDesc">이 후보 시간에 영향을 받는 참석자를 확인할 수 있어요.</p><div id="sheetPeople"></div><button class="close-sheet" id="closeSheet">확인</button></div></div>
+</div><div class="role">요청 보낸 사용자</div></div><div class="arrowcol" id="arrowColumn"><div class="arrow" id="arrow">➜</div></div><div id="receiverColumn"><div class="phone">
+<div class="receiver-power-off show" id="receiverPowerOff"><div class="lock-screen"><div class="lock-time">9:41</div><div class="lock-date">7월 16일 수요일</div></div></div><div class="onboard-wordmark">Quickly</div><button aria-label="온보딩 닫기" class="onboard-close" id="onboardCloseBtn">×</button>
+<div class="status"><span>9:41</span><span>5G 88%</span></div><div class="appbar"><div class="brand wordmark">Quickly</div><div class="app-actions"><button aria-label="알림 열기" class="tds-icon-button has-dot"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg></button><button aria-label="더보기" class="tds-icon-button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"></path></svg></button></div></div>
+<div class="body">
+<section class="screen show" id="r0">
+<div class="onboard-panel show" id="introSlide1">
+<div class="head"><h2>여러 사람의 일정을<br/>한 번에 맞춰요</h2><div class="desc">동료의 캘린더와 회의 선호를 함께 확인해 모두에게 적합한 시간을 찾아드려요.</div></div>
+<div class="onboard-dots"><i class="on"></i><i></i><i></i></div>
+<div class="onboard-bottom"><button class="setup-primary" id="introNext1">다음</button></div>
+</div>
+<div class="onboard-panel" id="introSlide2">
+<div class="head"><h2>가능한 시간보다<br/>괜찮은 시간을 찾아요</h2><div class="desc">점심 직후, 연속 회의, 선호 시간대처럼 캘린더만으로 알 수 없는 조건도 반영해요.</div></div>
+<div class="onboard-dots"><i></i><i class="on"></i><i></i></div>
+<div class="onboard-bottom"><button class="setup-primary" id="introNext2">다음</button></div>
+</div>
+<div class="onboard-panel" id="introSlide3">
+<div class="head"><h2>미팅 요청부터 확정까지<br/>더 빠르게 끝내요</h2><div class="desc">일정과 선호를 한 번 등록하면 이후 미팅마다 같은 정보를 반복해서 입력하지 않아도 돼요.</div></div>
+<div class="onboard-dots"><i></i><i></i><i class="on"></i></div>
+<div class="onboard-bottom"><button class="setup-primary" id="introFinish">시작하기</button></div>
+</div>
+<div class="onboard-panel" id="calendarConnectPanel">
+<div class="head"><h2>업무 캘린더를<br/>연결해 주세요</h2><div class="desc">회의 제목이나 상세 내용은 공개하지 않고, 가능한 시간만 일정 추천에 사용해요.</div></div>
+<div class="section"><div class="card"><div class="field"><div class="label">회사 계정</div><div class="value" style="font-size:17px">minji.park@company.com</div><div class="desc" style="margin-top:4px">회사에서 사용하는 캘린더를 자동으로 찾아 연결해요.</div></div></div></div>
+<div class="section"><div class="privacy-note"><b>일정 정보는 안전하게 사용돼요</b><span>동료에게는 일정 제목이나 내용이 아닌 참석 가능 여부만 보여요.</span></div></div>
+<div class="onboard-bottom"><button class="setup-primary" id="calendarConnectBtn">회사 캘린더 연결하기</button></div>
+</div>
+<div class="onboard-panel" id="preferencePanel">
+<div class="head"><h2>평소 선호하는<br/>회의 방식을 알려주세요</h2><div class="desc">특정 요일이 아니라 반복해서 적용할 수 있는 일반적인 기준을 설정해요.</div></div>
+<div class="section"><div class="card">
+<div class="preference-block" data-mode="multi"><strong>선호 시간대</strong><span class="required-mark">필수</span><p>가장 집중하기 좋은 회의 시간을 선택해 주세요.</p><div class="preference-options"><button class="pref-chip">오전</button><button class="pref-chip">점심 전후</button><button class="pref-chip">오후</button></div></div>
+<div class="preference-block" data-mode="single"><strong>회의 사이 여유 시간</strong><span class="required-mark">필수</span><p>연속 회의 사이에 필요한 최소 간격이에요.</p><div class="preference-options"><button class="pref-chip">없음</button><button class="pref-chip">15분</button><button class="pref-chip">30분</button></div></div>
+<div class="preference-block" data-mode="multi"><strong>피하고 싶은 시간</strong><span class="required-mark">필수</span><p>가능하지만 추천 순위를 낮추고 싶은 조건이에요.</p><div class="preference-options"><button class="pref-chip">점심 직후</button><button class="pref-chip">업무 시작 직후</button><button class="pref-chip">퇴근 전</button></div></div>
+<div class="preference-block" data-mode="multi"><strong>선호 회의 방식</strong><span class="required-mark">필수</span><p>시간 후보가 비슷할 때 우선 반영해요.</p><div class="preference-options"><button class="pref-chip">대면</button><button class="pref-chip">온라인</button><button class="pref-chip">상관없음</button></div></div>
+</div><div class="preference-validation" id="preferenceValidation">모든 필수 항목을 선택해 주세요.</div></div>
+<div class="onboard-bottom"><button class="setup-primary" id="preferenceSaveBtn">회의 선호 저장하기</button></div>
+</div>
+<div class="onboard-panel" id="setupCompletePanel">
+<div class="setup-complete"><div class="complete-icon">✓</div><h2>설정을 완료했어요</h2><p><b id="connectedCalendarName">Google Calendar</b>와 회의 선호를 바탕으로<br/>적합한 시간을 자동으로 찾아드려요.</p><div class="complete-summary"><div><span>회사 캘린더</span><strong id="completeCalendar">Google Calendar 연결됨</strong></div><div><span>회의 선호</span><strong id="completePrefs">4개 기준 저장됨</strong></div></div></div>
+<div class="onboard-bottom"><button class="setup-primary" id="setupCompleteBtn">홈으로 이동</button></div>
+</div>
+</section>
+<section class="screen" id="r1">
+<div class="home-top">
+<div><div class="home-greeting">박민지 님, 안녕하세요</div><h2>확인할 미팅이<br/>2개 있어요</h2></div>
+<button aria-label="내 설정" class="home-profile">박</button>
+</div>
+<div class="section home-section">
+<div class="home-summary">
+<div><span>응답 필요</span><strong>1</strong></div>
+<div><span>확정 대기</span><strong>1</strong></div>
+<div><span>이번 주 미팅</span><strong>4</strong></div>
+</div>
+</div>
+<div class="section home-section">
+<div class="title home-title-row"><span>받은 미팅 요청</span><button class="text-link">전체보기</button></div>
+<div class="home-request-list">
+<button class="home-request urgent" id="homeRequestAction">
+<div class="request-date"><strong>17</strong><span>목</span></div>
+<div class="request-copy"><div class="request-title">디자인 리뷰</div><div class="request-meta">오전 10:00 · 프로젝트룸 A</div><div class="request-owner">신호수 님 외 5명</div></div>
+<span class="request-status action">응답 필요</span>
+</button>
+<button class="home-request" data-detail-meta="7월 18일 금요일 오후 3:00 · 미팅룸 C · 다른 참석자 응답 대기" data-detail-title="3분기 캠페인 킥오프" id="homePendingAction">
+<div class="request-date muted"><strong>18</strong><span>금</span></div>
+<div class="request-copy"><div class="request-title">3분기 캠페인 킥오프</div><div class="request-meta">오후 3:00 · 미팅룸 C</div><div class="request-owner">김토스 님 외 7명</div></div>
+<span class="request-status waiting">확정 대기</span>
+</button>
+</div>
+</div>
+<div class="section home-section">
+<div class="title home-title-row"><span>예정된 미팅</span><button class="text-link">캘린더 보기</button></div>
+<div class="card upcoming-list">
+<div class="upcoming-row" data-detail-meta="오늘 오후 2:00 · 미팅룸 B · 1시간 · 캘린더 등록됨" data-detail-title="사업팀 주간회의"><div class="upcoming-time">오늘<br/><b>14:00</b></div><div><strong>사업팀 주간회의</strong><span>미팅룸 B · 1시간</span></div><span class="calendar-chip">등록됨</span></div>
+<div class="upcoming-row" data-detail-meta="내일 오전 11:00 · 화상회의 · 30분 · 캘린더 등록됨" data-detail-title="고객 인터뷰 공유"><div class="upcoming-time">내일<br/><b>11:00</b></div><div><strong>고객 인터뷰 공유</strong><span>화상회의 · 30분</span></div><span class="calendar-chip">등록됨</span></div>
+</div>
+</div>
+<div class="home-bottom-nav"><button class="active"><span class="nav-icon home"><svg viewbox="0 0 24 24"><path class="home-fill" d="M3.5 10.5 12 3l8.5 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5v-6h-4v6H5a1.5 1.5 0 0 1-1.5-1.5z"></path></svg></span>홈</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><rect height="15" rx="2" width="16" x="4" y="5"></rect><path d="M8 3v4M16 3v4M4 9h16"></path><path d="M9 13h6M9 16h4"></path></svg></span>미팅</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>내 일정</button><button><span class="nav-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1-2.8 2.8-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.6v.2h-4v-.2A1.8 1.8 0 0 0 8.8 19.4a1.8 1.8 0 0 0-2 .4l-.1.1-2.8-2.8.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.8 14H2.6v-4h.2A1.8 1.8 0 0 0 4.4 8.8a1.8 1.8 0 0 0-.4-2l-.1-.1 2.8-2.8.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 10 2.8v-.2h4v.2a1.8 1.8 0 0 0 1.1 1.6 1.8 1.8 0 0 0 2-.4l.1-.1 2.8 2.8-.1.1a1.8 1.8 0 0 0-.4 2A1.8 1.8 0 0 0 21.2 10h.2v4h-.2A1.8 1.8 0 0 0 19.4 15z"></path></svg></span>설정</button></div>
+</section>
+<section class="screen" id="r2"><div class="head"><h2>이번 회의에만<br/>추가 조건이 있나요?</h2><div class="desc">기존 캘린더와 선호로 판단하기 어려운 정보만 확인해요.</div></div><div class="section"><div class="card notif"><h3>디자인 리뷰</h3><p>목요일 외근 일정이 아직 확정되지 않아 한 가지만 확인해 주세요.</p><div class="meetingbox"><strong>7월 17일 목요일 오전 10시</strong><span>현재 캘린더는 비어 있지만 외근 가능성이 있어요.</span></div><div class="twobtn"><button class="ghost" id="hardBtn">어려워요</button><button class="primary" id="okBtn">참석 가능</button></div></div></div></section>
+<section class="screen" id="r3"><div class="head"><h2>이 시간에 참석할 수<br/>있나요?</h2><div class="desc">아직 확정된 회의가 아니에요. 참석 여부를 알려주면 요청자가 답변을 모아 최종 확정해요.</div></div><div class="section"><div class="card notif"><h3 id="noticeName">디자인 리뷰</h3><p>신호수 님이 참석 가능 여부를 요청했어요.</p><div class="meetingbox"><strong id="noticeTime">7월 16일 수요일 오후 2시</strong><span><b id="noticeRoom">미팅룸 B</b> · 1시간 · 필수 참석자<br/>아직 확정 전인 일정이에요.</span></div></div></div><div class="section"><div class="info" id="attendanceState">수락해도 바로 캘린더에 등록되지 않아요. 모든 필수 참석자의 응답 후 최종 확정 알림을 받아요.</div></div><div class="bottom-cta-double"><button class="cta-danger-weak" id="declineBtn" type="button">참석 어려워요</button><button class="cta-primary" id="acceptBtn" type="button">참석할게요</button></div></section><section class="screen" id="r4"><div class="head"><h2>참석 의사를<br/>전달했어요</h2><div class="desc">요청자가 다른 참석자들의 답변까지 확인한 뒤 최종 일정을 확정해요.</div></div><div class="section"><div class="card notif"><h3>디자인 리뷰</h3><p id="responseText">7월 16일 수요일 오후 2시에 참석할 수 있다고 답했어요.</p><div class="meetingbox"><strong>현재 상태 · 응답 대기</strong><span>최종 확정 전까지 캘린더와 회의실 예약은 임시 상태로 유지돼요.</span></div></div></div><div class="bottom-cta-single"><button class="cta-primary" id="responseHomeBtn" type="button">홈으로</button></div></section><section class="screen" id="r5"><div class="head"><h2>전원이 가능한 시간으로<br/>다시 확인해 주세요</h2><div class="desc">한 명의 불참 응답을 반영해 6명 모두 가능한 새 시간을 제안했어요.</div></div><div class="section"><div class="card notif"><h3>디자인 리뷰</h3><p>기존 요청의 시간이 변경됐어요.</p><div class="meetingbox"><strong id="reNoticeTime">7월 17일 목요일 오전 10시</strong><span><b id="reNoticeRoom">프로젝트룸 A</b> · 1시간 · 필수 참석자<br/>새 시간에 참석 가능한지 다시 알려주세요.</span></div></div></div><div class="bottom-cta-double"><button class="cta-danger-weak" id="reDeclineBtn" type="button">참석 어려워요</button><button class="cta-primary" id="reAcceptBtn" type="button">참석할게요</button></div></section><section class="screen" id="r6"><div class="head"><h2>디자인 리뷰 일정이<br/>확정됐어요</h2><div class="desc">6명 모두 수락해 캘린더와 회의실 예약이 완료됐어요.</div></div><div class="section"><div class="card notif"><h3>디자인 리뷰</h3><p>최종 확정된 일정이에요.</p><div class="meetingbox"><strong id="finalNoticeTime">7월 17일 목요일 오전 10시</strong><span><b id="finalNoticeRoom">프로젝트룸 A</b> · 1시간<br/>캘린더에 자동으로 추가됐어요.</span></div><button class="primary" style="width:100%;height:43px;border:0;border-radius:12px;margin-top:13px">캘린더에서 보기</button></div></div></section>
+</div>
+<section class="screen calendar-screen" id="rCalendar"><div class="head"><h2>내 일정</h2><div class="desc">확정된 미팅과 캘린더 일정을 확인해요.</div></div><div class="section"><div class="calendar-date-head">오늘 · 7월 16일 수요일</div><div class="card"><div class="calendar-event"><div class="calendar-event-time">14:00<br>15:00</div><div class="calendar-event-main"><strong>사업팀 주간회의</strong><span>미팅룸 B · 1시간</span></div><span class="calendar-chip">확정</span></div></div><div class="calendar-date-head">내일 · 7월 17일 목요일</div><div class="card"><div class="calendar-event"><div class="calendar-event-time">11:00<br>11:30</div><div class="calendar-event-main"><strong>고객 인터뷰 공유</strong><span>Google Meet · 30분</span></div><span class="calendar-chip">확정</span></div><div class="calendar-event"><div class="calendar-event-time">15:00<br>16:00</div><div class="calendar-event-main"><strong>3분기 캠페인 킥오프</strong><span>미팅룸 C · 확정 대기</span></div></div></div></div><div class="home-bottom-nav" id="calendarBottomNav"><button id="calendarHomeBtn"><span class="nav-icon home"><svg viewBox="0 0 24 24"><path class="home-fill" d="M3.5 10.5 12 3l8.5 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5v-6h-4v6H5a1.5 1.5 0 0 1-1.5-1.5z"></path></svg></span>홈</button><button><span class="nav-icon"><svg viewBox="0 0 24 24"><rect height="15" rx="2" width="16" x="4" y="5"></rect><path d="M8 3v4M16 3v4M4 9h16"></path><path d="M9 13h6M9 16h4"></path></svg></span>미팅</button><button class="active"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>내 일정</button><button><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle></svg></span>설정</button></div></section><div class="phone-modal" id="receiverDetailModal"><div class="phone-sheet"><div class="sheet-handle"></div><div class="sheet-title" id="receiverDetailTitle"></div><div class="sheet-meta" id="receiverDetailMeta"></div><button class="sheet-calendar" id="receiverCalendarBtn" style="display:none">일정 보러가기</button><button class="sheet-close" data-close-modal="receiverDetailModal">닫기</button></div></div></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let step=1;const max=6;const people=[];const directory=[{name:'김토스',team:'프로덕트팀',phone:'010-2345-1024',setup:true},{name:'김태현',team:'플랫폼개발팀',phone:'010-9281-4402',setup:true},{name:'김서연',team:'브랜드디자인팀',phone:'010-7751-3201',setup:true},{name:'이혜민',team:'디자인팀',phone:'010-5120-1188',setup:true},{name:'박민지',team:'사업팀',phone:'010-3431-8027',setup:true},{name:'최준호',team:'개발팀',phone:'010-6641-0902',setup:true},{name:'윤서진',team:'데이터팀',phone:'010-1992-7005',setup:true},{name:'정다은',team:'디자인팀',phone:'010-8143-6620',setup:true}];const $=id=>document.getElementById(id);const toast=$('toast');
+const meetingScenarioTab=$('meetingScenarioTab'),firstUseScenarioTab=$('firstUseScenarioTab'),scenarioFlow=$('scenarioFlow');
+(function repairScenarioStructure(){
+  const sender=$('senderColumn'), arrow=$('arrowColumn'), receiver=$('receiverColumn');
+  if(sender && arrow && receiver && scenarioFlow){
+    scenarioFlow.replaceChildren(sender,arrow,receiver);
+  }
+})();
+(function normalizeRoleLabels(){
+  const sender=$('senderColumn'),receiver=$('receiverColumn');
+  let senderRole=[...document.querySelectorAll('.role')].find(el=>el.textContent.trim()==='요청 보낸 사용자');
+  if(!senderRole){senderRole=document.createElement('div');senderRole.className='role';senderRole.textContent='요청 보낸 사용자'}
+  sender.appendChild(senderRole);
+  let receiverRole=$('receiverRoleLabel');
+  if(!receiverRole){receiverRole=document.createElement('div');receiverRole.className='role';receiverRole.id='receiverRoleLabel';receiverRole.textContent='요청 받은 사용자'}
+  receiver.appendChild(receiverRole);
+})();
+let arrowTimer;
+function showTransferArrow(){
+  const col=$('arrowColumn');
+  if(!col)return;
+  col.classList.add('visible');
+  $('arrow').classList.add('pulse');
+  clearTimeout(arrowTimer);
+  arrowTimer=setTimeout(()=>{col.classList.remove('visible');$('arrow').classList.remove('pulse')},900);
+}
+
+function setScenario(mode){
+  const isMeeting=mode==='meeting';
+  meetingScenarioTab.classList.toggle('active',isMeeting);
+  firstUseScenarioTab.classList.toggle('active',!isMeeting);
+  meetingScenarioTab.setAttribute('aria-selected',String(isMeeting));
+  firstUseScenarioTab.setAttribute('aria-selected',String(!isMeeting));
+  scenarioFlow.classList.toggle('first-use',!isMeeting);$('arrowColumn')?.classList.remove('visible');
+  if(isMeeting){
+    show('s',0);show('r',1);
+    $('steps').style.display='none';$('nextBtn').style.display='none';
+    $('receiverRoleLabel').textContent='요청 받은 사용자';
+    $('receiverPowerOff').classList.add('show');
+  }else{
+    $('receiverPowerOff').classList.remove('show');
+    show('r',0);
+    showOnboard('introSlide1');
+    $('receiverRoleLabel').textContent='사용자 첫 사용';
+  }
+}
+meetingScenarioTab.onclick=()=>setScenario('meeting');
+firstUseScenarioTab.onclick=()=>setScenario('first');
+$('onboardCloseBtn').onclick=()=>setScenario('meeting');
+$('createMeetingBtn').onclick=()=>{step=1;$('steps').style.display='flex';$('nextBtn').style.display='block';updateSteps();say('회의 일정 잡기를 시작했어요')};
+function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove('show'),1600)}
+
+let selectedCalendar='Google Calendar';
+function showOnboard(id){document.querySelectorAll('.onboard-panel').forEach(x=>x.classList.remove('show'));$(id).classList.add('show');}
+$('introNext1').onclick=()=>showOnboard('introSlide2');
+$('introNext2').onclick=()=>showOnboard('introSlide3');
+$('introFinish').onclick=()=>showOnboard('onboardIntro');
+if($('setupStartBtn'))$('setupStartBtn').onclick=()=>showOnboard('calendarConnectPanel');
+$('calendarConnectBtn').onclick=()=>{$('connectedCalendarName').textContent='회사 캘린더';$('completeCalendar').textContent='회사 캘린더 연결됨';showOnboard('preferencePanel');say('회사 캘린더를 연결했어요')};
+document.querySelectorAll('.pref-chip').forEach(btn=>btn.onclick=()=>{const wrap=btn.closest('.preference-options');wrap.querySelectorAll('.pref-chip').forEach(x=>x.classList.remove('on'));btn.classList.add('on')});
+$('preferenceSaveBtn').onclick=()=>{const count=document.querySelectorAll('.pref-chip.on').length;$('completePrefs').textContent=count+'개 조건 저장됨';showOnboard('setupCompletePanel');say('회의 선호를 저장했어요')};
+$('setupCompleteBtn').onclick=()=>{const pm=directory.find(p=>p.name==='박민지');if(pm)pm.setup=true;show('r',1);say('퀵클리 기본 설정을 완료했어요')};
+$('homeRequestAction').onclick=()=>{show('r',3);say('참석 요청을 열었어요')};
+$('homePendingAction').onclick=()=>say('다른 참석자들의 응답을 기다리고 있어요');
+
+function show(prefix,n){
+  document.querySelectorAll(`[id^="${prefix}"]`).forEach(x=>{if(/^.[0-9]$/.test(x.id))x.classList.remove('show')});
+  $(prefix+n).classList.add('show');
+  if(prefix==='r'){
+    const receiver=$('receiverColumn');
+    receiver.classList.toggle('home-active',n===1);
+    receiver.classList.toggle('onboarding-active',n===0);
+  }
+}
+function updateSteps(){document.querySelectorAll('#steps i').forEach((x,i)=>x.classList.toggle('on',i<step));show('s',step);$('nextBtn').textContent=step===6?'참석 요청 보내기':step===5?'이 시간 선택하기':'다음'}
+document.querySelectorAll('#duration .chip,#range .chip').forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+function addPerson(name,team='회사 동료',phone='사내 연락처',setup=true){if(!name||people.some(p=>p.name===name))return;people.push({name,team,phone,setup,required:true});renderPeople();$('directoryResults').classList.remove('show');}
+function renderPeople(){const list=$('peopleList');list.innerHTML='';people.forEach((p,i)=>{const row=document.createElement('div');row.className='person';row.innerHTML=`<div class="avatar">${p.name[0]}</div><div class="person-main"><div class="person-name">${p.name}</div><div class="person-meta">${p.team} · ${p.phone||'사내 연락처'} · ${p.setup?'설정 완료':'<span class="missing-text">설정 미완료</span>'}</div></div><div class="seg"><button class="${p.required?'on':''}">필수</button><button class="${!p.required?'on':''}">선택</button></div>`;const btns=row.querySelectorAll('button');btns[0].onclick=()=>{p.required=true;renderPeople()};btns[1].onclick=()=>{p.required=false;renderPeople()};list.appendChild(row)});if(!people.length)list.innerHTML='<div class="empty">아직 추가한 참석자가 없어요.<br>이름을 입력하거나 추천 동료를 선택해 주세요.</div>'}
+const input=$('personInput'),results=$('directoryResults');function renderDirectory(q){const query=q.trim().toLowerCase();if(!query){results.classList.remove('show');results.innerHTML='';return}const found=directory.filter(p=>p.name.toLowerCase().includes(query)||p.team.toLowerCase().includes(query)||p.phone.includes(query)).slice(0,6);results.innerHTML=found.length?found.map((p,i)=>`<button class="directory-item" data-index="${directory.indexOf(p)}"><div class="photo">${p.name[0]}</div><div><div class="directory-name">${p.name}</div><div class="directory-meta">${p.team} · ${p.phone}</div></div><span class="directory-status status-chip ${p.setup?'ready':'missing'}">${p.setup?'설정 완료':'설정 필요'}</span></button>`).join(''):'<div class="empty">검색 결과가 없어요.</div>';results.classList.add('show');results.querySelectorAll('.directory-item').forEach(btn=>btn.onclick=()=>{const p=directory[+btn.dataset.index];addPerson(p.name,p.team,p.phone,p.setup);input.value=''});}input.addEventListener('input',e=>renderDirectory(e.target.value));input.addEventListener('keydown',e=>{if(e.key==='Enter'){const first=results.querySelector('.directory-item');if(first){e.preventDefault();first.click()}}});document.querySelectorAll('#suggestions .chip').forEach(b=>b.onclick=()=>{const p=directory.find(x=>x.name===b.dataset.name);addPerson(b.dataset.name,b.dataset.team,p?.phone,p?.setup??true);b.classList.add('on')});
+function setLoadingRow(id,status){const row=$(id),state=row.querySelector('.state');row.classList.remove('active','done');if(status==='active'){row.classList.add('active');state.textContent='확인 중'}else if(status==='done'){row.classList.add('done');state.textContent='완료'}else{state.textContent='대기'}}
+function runAnalysisLoading(){
+  $('analysisLoading').classList.add('show');
+  $('analysisResult').classList.add('hidden');
+  $('nextBtn').disabled=true;
+  $('nextBtn').style.opacity='.5';
+  setLoadingRow('loadCalendar','active');setLoadingRow('loadPreference','wait');setLoadingRow('loadRoom','wait');
+  setTimeout(()=>{setLoadingRow('loadCalendar','done');setLoadingRow('loadPreference','active')},550);
+  setTimeout(()=>{setLoadingRow('loadPreference','done');setLoadingRow('loadRoom','active')},1100);
+  setTimeout(()=>{setLoadingRow('loadRoom','done')},1650);
+  setTimeout(()=>{$('analysisLoading').classList.remove('show');$('analysisResult').classList.remove('hidden');$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';say('일정과 선호 분석이 완료됐어요')},1950);
+}
+function buildAnalysis(){const req=people.filter(p=>p.required).length,opt=people.length-req,missing=people.filter(p=>!p.setup);$('analysisText').innerHTML=`<b>${people.length}명의 사내 정보를 확인했어요.</b><br>필수 ${req}명 · 선택 ${opt}명과 비어 있는 회의실을 함께 계산합니다.${missing.length?`<div class="setup-warning"><b>${missing.length}명은 캘린더 또는 회의 선호 설정이 없어요.</b><br>해당 동료에게 설정 요청을 보내고, 완료 전에는 추가 확인이 필요해요.<button class="setup-action" id="sendSetupRequestBtn">설정 요청 알림 보내기</button></div>`:''}`;const samples=['점심 직후 회의 비선호','목요일 외근이 많음','연속 회의 전후 30분 필요','금요일 오후 집중 업무'];$('analysisList').innerHTML=people.map((p,i)=>`<div class="person"><div class="avatar">${p.name[0]}</div><div class="person-main"><div class="person-name">${p.name} · ${p.required?'필수':'선택'}</div><div class="person-meta">${p.setup?samples[i%samples.length]+' · 캘린더·회의실 반영 완료':'캘린더·회의 선호 정보 없음 · 추가 확인 필요'}</div></div>${p.setup?`<span class="status-chip ready">확인됨</span>`:`<button class="setup-request-btn" data-setup-name="${p.name}">설정 요청</button>`}</div>`).join('');setTimeout(()=>{document.querySelectorAll('.setup-request-btn').forEach(btn=>btn.onclick=()=>say(btn.dataset.setupName+' 님에게 설정 요청 알림을 보냈어요'));const all=$('sendSetupRequestBtn');if(all)all.onclick=()=>say('설정이 필요한 동료에게 알림을 보냈어요')},0)}
+
+document.querySelectorAll('.room').forEach(r=>r.onclick=()=>{document.querySelectorAll('.room').forEach(x=>x.classList.remove('selected'));r.classList.add('selected');document.querySelectorAll('.roomstate').forEach(x=>x.textContent='선택');r.querySelector('.roomstate').textContent='추천';say(r.dataset.room+'을 선호 회의실로 선택했어요')});
+document.querySelectorAll('.candidate').forEach(c=>c.onclick=e=>{if(e.target.classList.contains('detail-btn'))return;document.querySelectorAll('.candidate').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');say('후보 시간을 선택했어요')});
+
+$('recommendMode').onclick=()=>{$('recommendMode').classList.add('on');$('directMode').classList.remove('on');$('recommendPanel').style.display='block';$('directPanel').classList.remove('show')};
+$('directMode').onclick=()=>{$('directMode').classList.add('on');$('recommendMode').classList.remove('on');$('recommendPanel').style.display='none';$('directPanel').classList.add('show')};
+
+const detailData={all:{title:'모두 참석 가능해요',desc:'필수·선택 참석자 모두 일정과 선호에 문제가 없어요.',people:[['김토스','프로덕트팀','참석 가능'],['이혜민','디자인팀','참석 가능'],['박민지','사업팀','참석 가능']]},absent:{title:'선택 참석자 1명이 불참해요',desc:'필수 참석자는 모두 가능하지만 아래 동료는 기존 일정과 겹쳐요.',people:[['윤서진','데이터팀','고객 미팅과 겹침']]},focus:{title:'2명이 비선호하는 시간이에요',desc:'참석은 가능하지만 저장해 둔 집중 업무 선호와 충돌해요.',people:[['이혜민','디자인팀','금요일 오후 집중 업무'],['정다은','디자인팀','연속 회의 전후 여유 없음']]}};
+document.querySelectorAll('.detail-btn').forEach(btn=>btn.onclick=e=>{e.stopPropagation();const c=btn.closest('.candidate'),d=detailData[c.dataset.detail];$('sheetTitle').textContent=d.title;$('sheetDesc').textContent=d.desc;$('sheetPeople').innerHTML=d.people.map(p=>`<div class="impact"><div class="avatar">${p[0][0]}</div><div><strong>${p[0]} · ${p[1]}</strong><span>${p[2]}</span></div></div>`).join('');$('detailSheet').classList.add('show')});$('closeSheet').onclick=()=>$('detailSheet').classList.remove('show');$('detailSheet').onclick=e=>{if(e.target===$('detailSheet'))$('detailSheet').classList.remove('show')};
+document.querySelectorAll('.alt-candidate').forEach(c=>c.onclick=()=>{document.querySelectorAll('.alt-candidate').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');say('전원 참석 가능한 시간을 선택했어요')});
+
+$('hardBtn').onclick=()=>{show('r',1);say('참석 어려움이 후보에 반영됐어요')};$('okBtn').onclick=()=>{show('r',1);say('참석 가능으로 반영됐어요')};
+$('nextBtn').onclick=()=>{if(($('recoordView')&&$('recoordView').style.display==='block')||($('allAcceptedView')&&$('allAcceptedView').style.display==='block'))return;if(step===3&&!people.length){say('참석자를 한 명 이상 추가해 주세요');return}if(step===3){buildAnalysis();step++;updateSteps();runAnalysisLoading();return}if(step<6){step++;updateSteps();return}const direct=$('directPanel').classList.contains('show');const sel=document.querySelector('.candidate.selected');const time=direct?document.querySelector('.direct-time.on').dataset.time:sel.dataset.time;const room=direct?$('directRoom').value:(sel.dataset.room||document.querySelector('.room.selected')?.dataset.room||'회의실 자동 배정');$('finalTime').textContent=time;$('finalMeta').innerHTML=`${$('meetingName').value} · 1시간<br>참석 요청 후보 시간<br><b>${room}</b>`;$('noticeName').textContent=$('meetingName').value;$('noticeTime').textContent=time;$('noticeRoom').textContent=room;$('pendingMeta').innerHTML=`${time}<br>${room} · 1시간`;$('requestPreview').style.display='none';$('pendingView').style.display='block';$('nextBtn').textContent='필수 참석자 응답 대기 중';$('nextBtn').disabled=true;$('nextBtn').style.opacity='.5';$('receiverPowerOff').classList.remove('show');show('r',3);showTransferArrow();say('참석 요청을 보내고 응답 대기 상태로 전환했어요')};
+$('acceptBtn').onclick=()=>{show('r',4);$('homeRequestAction').querySelector('.request-status').textContent='응답 완료';$('homeRequestAction').querySelector('.request-status').classList.remove('action');$('responseText').textContent=$('noticeTime').textContent+'에 참석할 수 있다고 답했어요.';$('pendingPersonText').textContent='참석할게요';$('pendingPersonBadge').textContent='수락';$('pendingPersonBadge').classList.remove('wait');$('pendingPersonBadge').classList.add('done');$('pendingBadge').textContent='응답 4/6';$('pendingFill').style.width='66%';$('pendingCaption').textContent='필수 참석자 1명을 포함해 2명이 아직 응답하지 않았어요.';say('참석 의사를 전달했어요')};$('declineBtn').onclick=()=>{show('r',4);$('responseText').textContent='해당 시간은 참석하기 어렵다고 답했어요.';$('pendingPersonText').textContent='참석 어려움';$('pendingPersonBadge').textContent='불참';$('pendingPersonBadge').classList.remove('wait','done');$('pendingPersonBadge').style.background='var(--orange50)';$('pendingPersonBadge').style.color='var(--orange)';$('pendingBadge').textContent='응답 6/6';$('pendingFill').style.width='100%';$('pendingCaption').textContent='필수 참석자 1명의 불참으로 재조율이 필요해요.';$('pendingInfo').innerHTML='<b>필수 참석자 1명이 불참했어요.</b><br>6명 모두 가능한 다른 시간을 다시 추천했어요.';$('pendingView').style.display='none';$('recoordView').style.display='block';$('nextBtn').textContent='새 시간으로 다시 요청';$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';say('6명 모두 가능한 다른 시간을 찾았어요')};if($('otherTimeBtn'))$('otherTimeBtn').onclick=()=>say('다른 추천 시간을 제안할 수 있는 화면으로 이동해요');
+$('nextBtn').addEventListener('click',()=>{if($('recoordView').style.display==='block'){const alt=document.querySelector('.alt-candidate.selected');$('reNoticeTime').textContent=alt.dataset.time;$('reNoticeRoom').textContent=alt.dataset.room;$('acceptedTime').textContent=alt.dataset.time;$('acceptedRoom').textContent=alt.dataset.room;$('finalNoticeTime').textContent=alt.dataset.time;$('finalNoticeRoom').textContent=alt.dataset.room;show('r',5);showTransferArrow();$('nextBtn').textContent='변경 응답 대기 중';$('nextBtn').disabled=true;$('nextBtn').style.opacity='.5';say('변경된 시간으로 참석 요청을 다시 보냈어요')}});
+$('reAcceptBtn').onclick=()=>{$('recoordView').style.display='none';$('allAcceptedView').style.display='block';$('nextBtn').textContent='일정과 회의실 최종 확정';$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';say('6명 모두 참석 가능하다고 답했어요')};
+$('reDeclineBtn').onclick=()=>say('다시 전원 가능한 다음 후보를 계산해요');
+$('nextBtn').addEventListener('click',()=>{if($('allAcceptedView').style.display==='block'){show('r',6);$('nextBtn').textContent='확정 완료';$('nextBtn').disabled=true;$('nextBtn').style.opacity='.5';say('일정과 회의실을 최종 확정했어요')}});
+setScenario('meeting');
+
+function openPhoneDetail(modalId,titleId,metaId,title,meta){
+  $(titleId).textContent=title;$(metaId).textContent=meta;$(modalId).classList.add('show');
+}
+document.querySelectorAll('#senderColumn [data-detail-title]').forEach(el=>el.addEventListener('click',()=>openPhoneDetail('senderDetailModal','senderDetailTitle','senderDetailMeta',el.dataset.detailTitle,el.dataset.detailMeta)));
+document.querySelectorAll('#receiverColumn .upcoming-row[data-detail-title]').forEach(el=>el.addEventListener('click',()=>{openPhoneDetail('receiverDetailModal','receiverDetailTitle','receiverDetailMeta',el.dataset.detailTitle,el.dataset.detailMeta);$('receiverCalendarBtn').style.display='block'}));
+document.querySelectorAll('[data-close-modal]').forEach(btn=>btn.onclick=()=>$(btn.dataset.closeModal).classList.remove('show'));
+$('homePendingAction').onclick=()=>{$('receiverCalendarBtn').style.display='none';openPhoneDetail('receiverDetailModal','receiverDetailTitle','receiverDetailMeta',$('homePendingAction').dataset.detailTitle,$('homePendingAction').dataset.detailMeta)};
+document.querySelectorAll('.phone-modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+</script>
+<style id="absolute-scene-final">
+/* Single source of truth for the presentation layout. */
+html,body{width:100%;height:100%;overflow:hidden!important}
+.page{position:relative!important;width:100vw!important;height:100vh!important;min-height:0!important;padding:0!important;overflow:hidden!important;display:block!important}
+.scenario-switch{position:absolute!important;top:14px!important;left:50%!important;transform:translateX(-50%)!important;width:720px!important;height:56px!important;margin:0!important;z-index:100!important}
+#scenarioFlow{margin:0!important;max-width:none!important;zoom:1!important}
+#scenarioFlow:not(.first-use){
+  position:absolute!important;
+  display:block!important;
+  width:940px!important;
+  height:732px!important;
+  max-width:none!important;
+  transform-origin:top left!important;
+  overflow:visible!important;
+}
+#scenarioFlow:not(.first-use)>#senderColumn{
+  position:absolute!important;left:0!important;top:0!important;
+  width:360px!important;height:732px!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  margin:0!important;transform:none!important;z-index:2!important;
+}
+#scenarioFlow:not(.first-use)>#arrowColumn{
+  position:absolute!important;left:420px!important;top:0!important;
+  width:100px!important;height:700px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  margin:0!important;transform:none!important;z-index:1!important;
+}
+#scenarioFlow:not(.first-use)>#receiverColumn{
+  position:absolute!important;left:580px!important;top:0!important;
+  width:360px!important;height:732px!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  margin:0!important;transform:none!important;z-index:2!important;
+}
+#scenarioFlow:not(.first-use) .phone{
+  position:relative!important;left:0!important;top:0!important;
+  width:360px!important;height:700px!important;min-width:360px!important;max-width:360px!important;
+  flex:0 0 700px!important;margin:0!important;transform:none!important;zoom:1!important;order:1!important;
+}
+#scenarioFlow:not(.first-use) .role{
+  position:static!important;width:360px!important;height:23px!important;
+  flex:0 0 23px!important;margin:9px 0 0!important;order:2!important;text-align:center!important;
+}
+#scenarioFlow.first-use{
+  position:absolute!important;display:block!important;width:360px!important;height:700px!important;
+  margin:0!important;transform-origin:top left!important;zoom:1!important;
+}
+#scenarioFlow.first-use #receiverColumn{position:absolute!important;left:0!important;top:0!important;width:360px!important;height:700px!important;display:block!important;transform:none!important}
+#scenarioFlow.first-use #senderColumn,#scenarioFlow.first-use #arrowColumn{display:none!important}
+/* Disable every former responsive transform; JS owns the scene scale. */
+@media (max-width:2000px),(max-height:2000px){
+  #scenarioFlow:not(.first-use),#scenarioFlow.first-use{zoom:1!important}
+}
+
+/* v4 targeted refinements */
+.searchrow{display:block}
+.searchrow .input{width:100%}
+.seg button:first-child.on{background:var(--blue);color:#fff;box-shadow:none}
+.seg button:last-child.on{background:#6b7684;color:#fff;box-shadow:none}
+#recommendPanel{display:grid;gap:10px}
+#recommendPanel .candidate-card{margin:0;border:1px solid var(--line)!important;border-radius:17px!important;overflow:visible}
+#recommendPanel .candidate-card:first-child{border-top:1px solid var(--line)!important}
+#altCandidates{display:grid;gap:10px;overflow:visible;background:transparent;border:0;box-shadow:none}
+#altCandidates .alt-candidate{margin:0;padding:15px;border:1px solid var(--line)!important;border-radius:17px;background:#fff;overflow:visible;box-shadow:0 5px 16px rgba(15,23,42,.05)}
+#altCandidates .alt-candidate:first-child{border-top:1px solid var(--line)!important}
+#altCandidates .alt-candidate.selected{border-color:var(--blue)!important;background:var(--blue50)}
+.direct-summary{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:14px 15px}
+.direct-summary strong{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.45;word-break:keep-all}
+.direct-summary .summary-date{font-weight:800;color:var(--text)}
+.direct-summary .summary-time{font-weight:700;color:var(--sub)}
+.picker-label:not(.required-label){margin-bottom:12px}
+
+/* First-use calendar connection: keep a 16px gap below the app header */
+#scenarioFlow.first-use #calendarConnectPanel .head{padding-top:16px!important;}
+</style>
+<script id="absolute-scene-layout">
+(function(){
+  const flow=document.getElementById('scenarioFlow');
+  const switcher=document.querySelector('.scenario-switch');
+  if(!flow||!switcher)return;
+  function layoutScene(){
+    const first=flow.classList.contains('first-use');
+    const sceneW=first?360:940;
+    const sceneH=first?700:732;
+    const top=82;
+    const side=24;
+    const availableW=Math.max(320,window.innerWidth-side*2);
+    const availableH=Math.max(360,window.innerHeight-top-16);
+    const scale=Math.min(1,availableW/sceneW,availableH/sceneH);
+    const renderedW=sceneW*scale;
+    flow.style.setProperty('transform',`scale(${scale})`,'important');
+    flow.style.setProperty('left',`${Math.max(side,(window.innerWidth-renderedW)/2)}px`,'important');
+    flow.style.setProperty('top',`${top}px`,'important');
+    if(window.innerWidth<760){
+      switcher.style.setProperty('width',`${Math.max(300,window.innerWidth-32)}px`,'important');
+    }else{
+      switcher.style.setProperty('width','720px','important');
+    }
+  }
+  window.addEventListener('resize',layoutScene,{passive:true});
+  const observer=new MutationObserver(layoutScene);
+  observer.observe(flow,{attributes:true,attributeFilter:['class']});
+  requestAnimationFrame(layoutScene);
+  setTimeout(layoutScene,50);
+})();
+</script>
+<script id="v8-interactions">
+(function(){
+  const $=id=>document.getElementById(id);
+  const baseDate=new Date(2026,6,16);
+  let rangeDays=7;
+  let calCursor=new Date(2026,6,1);
+  let selectedDate=null;
+  let selectedTime=null;
+  let durationMinutes=60;
+
+  const durationMap={'30분':30,'1시간':60,'1시간 30분':90,'2시간':120};
+  function selectedDurationLabel(){const b=document.querySelector('#duration .chip.on');return b?b.textContent.trim():'1시간'}
+  function syncDuration(){durationMinutes=durationMap[selectedDurationLabel()]||60;renderTimeSlots();}
+  document.querySelectorAll('#duration .chip').forEach(b=>b.addEventListener('click',syncDuration));
+  document.querySelectorAll('#range .chip').forEach(b=>b.addEventListener('click',()=>{rangeDays=Number(b.dataset.days||7);selectedDate=null;selectedTime=null;calCursor=new Date(baseDate.getFullYear(),baseDate.getMonth(),1);renderCalendar();renderTimeSlots();updateDirectSummary();}));
+
+  function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+  function sameDay(a,b){return a&&b&&a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+  function inRange(d){const end=addDays(baseDate,rangeDays-1);return d>=baseDate&&d<=end}
+  function isAvailableDate(d){return inRange(d)&&d.getDay()!==0&&d.getDay()!==6}
+  const weekday=['일','월','화','수','목','금','토'];
+  function fmtDate(d){return `${d.getMonth()+1}월 ${d.getDate()}일 ${weekday[d.getDay()]}요일`}
+  function fmtClock(total){const h=Math.floor(total/60),m=total%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`}
+  function humanClock(total){const h=Math.floor(total/60),m=total%60,ap=h<12?'오전':'오후',hh=h%12||12;return `${ap} ${hh}시${m?` ${m}분`:''}`}
+
+  function renderCalendar(){
+    const grid=$('directCalendar');if(!grid)return;
+    $('calendarMonth').textContent=`${calCursor.getFullYear()}년 ${calCursor.getMonth()+1}월`;
+    grid.innerHTML='';
+    const first=new Date(calCursor.getFullYear(),calCursor.getMonth(),1);
+    const last=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,0);
+    for(let i=0;i<first.getDay();i++){const e=document.createElement('button');e.className='calendar-day empty';grid.appendChild(e)}
+    for(let day=1;day<=last.getDate();day++){
+      const d=new Date(calCursor.getFullYear(),calCursor.getMonth(),day);
+      const b=document.createElement('button');b.type='button';b.className='calendar-day '+(isAvailableDate(d)?'available':'disabled');b.textContent=day;
+      if(sameDay(d,selectedDate))b.classList.add('on');
+      b.disabled=!isAvailableDate(d);
+      b.onclick=()=>{selectedDate=d;selectedTime=null;renderCalendar();renderTimeSlots();updateDirectSummary();$('dateValidation').classList.remove('show')};
+      grid.appendChild(b);
+    }
+  }
+  function renderTimeSlots(){
+    const grid=$('directGrid');if(!grid)return;grid.innerHTML='';
+    if(!selectedDate){grid.innerHTML='<div class="empty" style="grid-column:1/-1;padding:14px">먼저 날짜를 선택해 주세요.</div>';return}
+    const starts=[9*60,10*60+30,13*60,14*60+30,16*60];
+    starts.forEach((start,i)=>{
+      const end=start+durationMinutes;
+      const b=document.createElement('button');b.type='button';b.className='direct-time';b.dataset.start=String(start);b.textContent=`${fmtClock(start)}–${fmtClock(end)}`;
+      if(selectedTime===start)b.classList.add('on');
+      b.onclick=()=>{selectedTime=start;renderTimeSlots();updateDirectSummary();$('timeValidation').classList.remove('show')};
+      grid.appendChild(b)
+    })
+  }
+  function updateDirectSummary(){
+    const box=$('directSummaryBox');if(!box)return;
+    if(selectedDate&&selectedTime!=null){box.style.display='flex';$('directSelectionText').innerHTML=`<span class="summary-date">${fmtDate(selectedDate)}</span><span class="summary-time">${humanClock(selectedTime)} · ${selectedDurationLabel()}</span>`}
+    else box.style.display='none';
+  }
+  $('calendarPrev').onclick=()=>{calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()-1,1);renderCalendar()};
+  $('calendarNext').onclick=()=>{calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,1);renderCalendar()};
+  renderCalendar();renderTimeSlots();updateDirectSummary();
+
+  // Preference behavior and required validation
+  document.querySelectorAll('#preferencePanel .preference-block').forEach(block=>{
+    const multi=block.dataset.mode==='multi';
+    block.querySelectorAll('.pref-chip').forEach(btn=>btn.onclick=()=>{
+      if(multi)btn.classList.toggle('on');
+      else{block.querySelectorAll('.pref-chip').forEach(x=>x.classList.remove('on'));btn.classList.add('on')}
+      $('preferenceValidation').classList.remove('show');
+    });
+  });
+  $('preferenceSaveBtn').onclick=()=>{
+    const blocks=[...document.querySelectorAll('#preferencePanel .preference-block')];
+    const valid=blocks.every(b=>b.querySelector('.pref-chip.on'));
+    if(!valid){$('preferenceValidation').classList.add('show');say('모든 필수 항목을 선택해 주세요');return}
+    const count=document.querySelectorAll('#preferencePanel .pref-chip.on').length;
+    $('completePrefs').textContent=count+'개 조건 저장됨';showOnboard('setupCompletePanel');say('회의 선호를 저장했어요');
+  };
+
+  // Intro goes directly to calendar and exits fullscreen onboarding mode.
+  $('introFinish').onclick=()=>{const receiver=$('receiverColumn');receiver.classList.add('setup-phase');showOnboard('calendarConnectPanel')};
+
+  // Meeting request final edit button is physically under the primary button.
+  function syncEditButton(){
+    const sender=$('senderColumn');
+    const active=step===6&&$('requestPreview').style.display!=='none';
+    sender.classList.toggle('request-preview-active',active);
+  }
+  const originalUpdate=window.updateSteps;
+  window.updateSteps=function(){originalUpdate();syncEditButton()};
+  $('editRequestBtn').onclick=()=>{step=1;$('requestPreview').style.display='block';$('pendingView').style.display='none';$('recoordView').style.display='none';$('allAcceptedView').style.display='none';$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';updateSteps();say('회의 정보를 다시 수정할 수 있어요')};
+
+  // Override next action to enforce direct-date/time required values.
+  $('nextBtn').onclick=()=>{
+    if(($('recoordView')&&$('recoordView').style.display==='block')||($('allAcceptedView')&&$('allAcceptedView').style.display==='block'))return;
+    if(step===3&&!people.length){say('참석자를 한 명 이상 추가해 주세요');return}
+    if(step===3){buildAnalysis();step++;updateSteps();runAnalysisLoading();return}
+    if(step===5&&$('directPanel').classList.contains('show')){
+      let invalid=false;
+      if(!selectedDate){$('dateValidation').classList.add('show');invalid=true}
+      if(selectedTime==null){$('timeValidation').classList.add('show');invalid=true}
+      if(invalid){say('날짜와 시간을 모두 선택해 주세요');return}
+    }
+    if(step<6){step++;updateSteps();return}
+    const direct=$('directPanel').classList.contains('show');
+    const sel=document.querySelector('.candidate.selected');
+    const duration=selectedDurationLabel();
+    const time=direct?`${fmtDate(selectedDate)} ${humanClock(selectedTime)}`:sel.dataset.time;
+    const meetingType=document.querySelector('#meetingType .meeting-type.on')?.dataset.type||'offline';
+    const room=meetingType==='online'?'Google Meet':(sel?.dataset.room||document.querySelector('.room.selected')?.dataset.room||'회의실 자동 배정');
+    $('finalTime').textContent=time;
+    $('finalMeta').innerHTML=`${$('meetingName').value} · ${duration}<br>참석 요청 후보 시간<br><b>${room}</b>`;
+    $('noticeName').textContent=$('meetingName').value;$('noticeTime').textContent=time;$('noticeRoom').textContent=room;
+    $('pendingMeta').innerHTML=`${time}<br>${room} · ${duration}`;
+    $('requestPreview').style.display='none';$('pendingView').style.display='block';syncEditButton();
+    $('nextBtn').textContent='필수 참석자 응답 대기 중';$('nextBtn').disabled=true;$('nextBtn').style.opacity='.5';
+    $('receiverPowerOff').classList.remove('show');show('r',3);showTransferArrow();say('참석 요청을 보냈어요');
+  };
+
+  // Response buttons and home return.
+  $('acceptBtn').onclick=()=>{show('r',4);$('homeRequestAction').querySelector('.request-status').textContent='응답 완료';$('homeRequestAction').querySelector('.request-status').classList.remove('action');$('responseText').textContent=$('noticeTime').textContent+'에 참석할 수 있다고 답했어요.';$('pendingPersonText').textContent='참석할게요';$('pendingPersonBadge').textContent='수락';$('pendingPersonBadge').classList.remove('wait');$('pendingPersonBadge').classList.add('done');$('pendingBadge').textContent='응답 4/6';$('pendingFill').style.width='66%';$('pendingCaption').textContent='필수 참석자 1명을 포함해 2명이 아직 응답하지 않았어요.';say('참석 의사를 전달했어요')};
+  $('declineBtn').onclick=()=>{show('r',4);$('responseText').textContent='해당 시간은 참석하기 어렵다고 답했어요.';$('pendingPersonText').textContent='참석 어려움';$('pendingPersonBadge').textContent='불참';$('pendingPersonBadge').classList.remove('wait','done');$('pendingPersonBadge').style.background='var(--red50)';$('pendingPersonBadge').style.color='var(--red)';$('pendingBadge').textContent='응답 6/6';$('pendingFill').style.width='100%';$('pendingCaption').textContent='필수 참석자 1명의 불참으로 재조율이 필요해요.';$('pendingInfo').innerHTML='<b>필수 참석자 1명이 불참했어요.</b><br>6명 모두 가능한 다른 시간을 다시 추천했어요.';$('pendingView').style.display='none';$('recoordView').style.display='block';$('nextBtn').textContent='새 시간으로 다시 요청';$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';say('6명 모두 가능한 다른 시간을 찾았어요')};
+  $('reAcceptBtn').onclick=()=>{$('recoordView').style.display='none';$('allAcceptedView').style.display='block';$('nextBtn').textContent='일정과 회의실 최종 확정';$('nextBtn').disabled=false;$('nextBtn').style.opacity='1';say('6명 모두 참석 가능하다고 답했어요')};
+  $('reDeclineBtn').onclick=()=>say('다시 전원 가능한 다음 후보를 계산해요');
+  $('responseHomeBtn').onclick=()=>{show('r',1);say('홈으로 돌아왔어요')};
+  $('receiverCalendarBtn').onclick=()=>{$('receiverDetailModal').classList.remove('show');show('r','Calendar');say('내 일정으로 이동했어요')};
+  $('calendarHomeBtn').onclick=()=>{show('r',1);say('홈으로 돌아왔어요')};
+  document.querySelectorAll('#receiverColumn .text-link').forEach(btn=>{if(btn.textContent.includes('캘린더'))btn.onclick=()=>show('r','Calendar')});
+  const receiverNavButtons=document.querySelectorAll('#r1 .home-bottom-nav button');if(receiverNavButtons[2])receiverNavButtons[2].onclick=()=>show('r','Calendar');
+})();
+</script><button id="setupStartBtn" style="display:none"></button><button id="otherTimeBtn" style="display:none"></button>
+<script id="canvas-fit-script">
+(function(){
+  const canvas = document.querySelector('.canvas-page');
+  const W = 1920, H = 1080;
+  function fitCanvas(){
+    const scale = Math.min(window.innerWidth / W, window.innerHeight / H);
+    canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+  window.addEventListener('resize', fitCanvas, {passive:true});
+  fitCanvas();
+})();
+</script>
+
+<script id="meeting-location-fixes-script">
+(function(){
+  const meetingTypeButtons=[...document.querySelectorAll('#meetingType .meeting-type')];
+  const offlineOptions=document.getElementById('offlineOptions');
+  const onlinePanel=document.getElementById('onlinePanel');
+  const autoRoomPanel=document.getElementById('autoRoomPanel');
+  const fixedRoomPanel=document.getElementById('fixedRoomPanel');
+  const roomModeButtons=[...document.querySelectorAll('#roomChoiceMode button')];
+
+  function setMeetingType(type){
+    meetingTypeButtons.forEach(btn=>{
+      const active=btn.dataset.type===type;
+      btn.classList.toggle('on',active);
+      btn.setAttribute('aria-checked',String(active));
+    });
+    const isOnline=type==='online';
+    if(offlineOptions) offlineOptions.style.display=isOnline?'none':'block';
+    if(onlinePanel) onlinePanel.classList.toggle('show',isOnline);
+  }
+
+  meetingTypeButtons.forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.preventDefault();
+      setMeetingType(btn.dataset.type);
+    });
+  });
+
+  function setRoomMode(mode){
+    roomModeButtons.forEach(btn=>btn.classList.toggle('on',btn.dataset.mode===mode));
+    if(autoRoomPanel) autoRoomPanel.classList.toggle('show',mode==='auto');
+    if(fixedRoomPanel) fixedRoomPanel.classList.toggle('show',mode==='fixed');
+  }
+
+  roomModeButtons.forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.preventDefault();
+      setRoomMode(btn.dataset.mode);
+    });
+  });
+
+  setMeetingType(document.querySelector('#meetingType .meeting-type.on')?.dataset.type||'offline');
+  setRoomMode(document.querySelector('#roomChoiceMode button.on')?.dataset.mode||'auto');
+})();
+</script>
+</body>
+</html>
