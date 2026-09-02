@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>eSignon 완료 UI 타입 테스트 v40.88</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>eSignon 완료 UI 타입 테스트 v40.89</title>
   <style>
     :root {
       --blue-50: #eaf6ff;
@@ -23,12 +23,15 @@
       --surface: #ffffff;
       --radius-lg: 12px;
       --radius-xl: 16px;
+      --visual-viewport-height: 100dvh;
+      --visual-viewport-offset-top: 0px;
+      --sheet-max-height: 90dvh;
       --font: "Pretendard GOV", "Pretendard", "Apple SD Gothic Neo", -apple-system,
         BlinkMacSystemFont, system-ui, sans-serif;
     }
 
     * { box-sizing: border-box; font-family: var(--font); letter-spacing: -0.2px; }
-    html, body { width: 100%; height: 100%; margin: 0; }
+    html, body { width: 100%; height: 100%; margin: 0; overscroll-behavior: none; }
     body { overflow: hidden; color: var(--gray-900); background: var(--gray-100); }
     button, a, textarea { font: inherit; }
     button { appearance: none; }
@@ -159,25 +162,46 @@
     @media (max-width: 1023px) {
       .test-action { width: 100%; max-width: 360px; height: 56px; }
       .test-actions { width: 100%; flex-direction: column; align-items: center; }
-      .overlay { align-items: flex-end; padding: 0; background: rgba(0, 0, 0, 0.45); }
+      .overlay {
+        inset: auto 0 auto 0;
+        top: var(--visual-viewport-offset-top, 0px);
+        width: 100%;
+        height: var(--visual-viewport-height, 100dvh);
+        align-items: flex-end;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.45);
+      }
       .dialog {
-        width: 100%; max-width: none; max-height: 90vh; border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-        padding: 0; box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.16); overflow: hidden;
+        width: 100%; max-width: none; max-height: var(--sheet-max-height, 90dvh);
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding: 0;
+        box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.16); overflow: hidden;
+        display: flex; flex-direction: column;
       }
       .sheet-handle {
         height: 20px; display: flex; align-items: flex-start; justify-content: center; padding-top: 16px;
+        flex: 0 0 auto;
       }
       .sheet-handle::before {
         content: ""; width: 48px; height: 4px; flex: 0 0 auto; border-radius: 2px;
         background: var(--gray-200);
       }
-      .dialog-header { padding: 16px 16px 0; }
+      .dialog-header { padding: 16px 16px 0; flex: 0 0 auto; }
       .dialog-title { font-size: 20px; line-height: 1.4; }
-      .dialog-body { margin-top: 0; padding: 16px 16px 8px; overflow-y: auto; }
-      .dialog-footer {
-        margin-top: 0; padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); background: var(--surface);
+      .dialog-body {
+        margin-top: 0; padding: 16px 16px 8px; min-height: 0;
+        flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
       }
+      .dialog-footer {
+        margin-top: 0; padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+        background: var(--surface); flex: 0 0 auto;
+      }
+      .dialog.keyboard-open .dialog-footer { padding-bottom: 12px; }
       .dialog-button { height: 56px; flex: 1; padding: 0 12px; }
+      .message-input {
+        font-size: 16px; line-height: 1.5; padding-top: 12px; padding-bottom: 12px;
+      }
+      .message-toggle, .dialog-button { touch-action: manipulation; }
     }
 
     @keyframes dialog-in {
@@ -303,6 +327,7 @@
     const completionDialog = document.getElementById("completionDialog");
     const dialogTitle = document.getElementById("dialogTitle");
     const dialogSubtitle = document.getElementById("dialogSubtitle");
+    const dialogBody = document.getElementById("dialogBody");
     const noticeBox = document.getElementById("noticeBox");
     const recipientMessage = document.getElementById("recipientMessage");
     const messageToggle = document.getElementById("messageToggle");
@@ -315,8 +340,50 @@
     const completionMessage = document.getElementById("completionMessage");
     const completionTitle = document.getElementById("completionTitle");
     const completionDescription = document.getElementById("completionDescription");
+    const mobileMedia = window.matchMedia("(max-width: 1023px)");
+    const visualViewport = window.visualViewport;
+    let stableViewportHeight = visualViewport ? visualViewport.height : window.innerHeight;
+    let viewportFrame = 0;
     let activeType = "sign";
     let currentTrigger = openButtons[0];
+
+    function isMessageFocused() {
+      return document.activeElement === messageInput;
+    }
+
+    function keepMessageInputVisible() {
+      if (!mobileMedia.matches || !isMessageFocused() || messagePanel.hidden) return;
+      const bodyRect = dialogBody.getBoundingClientRect();
+      const inputRect = messageInput.parentElement.getBoundingClientRect();
+      const bottomGap = 8;
+
+      if (inputRect.bottom > bodyRect.bottom - bottomGap) {
+        dialogBody.scrollTop += inputRect.bottom - bodyRect.bottom + bottomGap;
+      } else if (inputRect.top < bodyRect.top + bottomGap) {
+        dialogBody.scrollTop -= bodyRect.top - inputRect.top + bottomGap;
+      }
+    }
+
+    function updateMobileViewport() {
+      cancelAnimationFrame(viewportFrame);
+      viewportFrame = requestAnimationFrame(() => {
+        const viewportHeight = visualViewport ? visualViewport.height : window.innerHeight;
+        const viewportOffsetTop = visualViewport ? visualViewport.offsetTop : 0;
+
+        if (!isMessageFocused()) stableViewportHeight = viewportHeight;
+
+        const keyboardReduction = Math.max(0, stableViewportHeight - viewportHeight);
+        const keyboardOpen = mobileMedia.matches && isMessageFocused() && keyboardReduction > 120;
+        const sheetHeight = keyboardOpen ? viewportHeight : viewportHeight * 0.9;
+
+        document.documentElement.style.setProperty("--visual-viewport-height", `${Math.round(viewportHeight)}px`);
+        document.documentElement.style.setProperty("--visual-viewport-offset-top", `${Math.round(viewportOffsetTop)}px`);
+        document.documentElement.style.setProperty("--sheet-max-height", `${Math.round(sheetHeight)}px`);
+        completionDialog.classList.toggle("keyboard-open", keyboardOpen);
+
+        if (keyboardOpen) requestAnimationFrame(keepMessageInputVisible);
+      });
+    }
 
     function resetMessage() {
       messageToggle.setAttribute("aria-expanded", "false");
@@ -348,12 +415,15 @@
       nextTargetSummary.title = nextTargetSummary.textContent;
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
+      updateMobileViewport();
       requestAnimationFrame(() => completeButton.focus());
     }
 
     function closeDialog() {
+      if (isMessageFocused()) messageInput.blur();
       overlay.classList.remove("is-open");
       overlay.setAttribute("aria-hidden", "true");
+      completionDialog.classList.remove("keyboard-open");
       currentTrigger.focus();
     }
 
@@ -369,7 +439,16 @@
       const willOpen = messageToggle.getAttribute("aria-expanded") !== "true";
       messageToggle.setAttribute("aria-expanded", String(willOpen));
       messagePanel.hidden = !willOpen;
-      if (willOpen) requestAnimationFrame(() => messageInput.focus());
+      if (willOpen) {
+        requestAnimationFrame(() => {
+          try { messageInput.focus({ preventScroll: true }); }
+          catch (error) { messageInput.focus(); }
+          updateMobileViewport();
+          setTimeout(keepMessageInputVisible, 180);
+        });
+      } else if (isMessageFocused()) {
+        messageInput.blur();
+      }
     });
     messageInput.addEventListener("input", () => {
       messageCount.textContent = String(messageInput.value.length);
@@ -377,11 +456,19 @@
       const nextHeight = Math.min(messageInput.scrollHeight, 108);
       messageInput.style.height = `${nextHeight}px`;
       messageInput.style.overflowY = messageInput.scrollHeight > 108 ? "auto" : "hidden";
+      if (mobileMedia.matches) requestAnimationFrame(keepMessageInputVisible);
     });
+    messageInput.addEventListener("focus", () => {
+      updateMobileViewport();
+      setTimeout(keepMessageInputVisible, 180);
+    });
+    messageInput.addEventListener("blur", () => setTimeout(updateMobileViewport, 120));
     cancelButton.addEventListener("click", closeDialog);
     completeButton.addEventListener("click", () => {
+      if (isMessageFocused()) messageInput.blur();
       overlay.classList.remove("is-open");
       overlay.setAttribute("aria-hidden", "true");
+      completionDialog.classList.remove("keyboard-open");
       const config = completionTypes[activeType];
       completionTitle.textContent = config.successTitle;
       completionDescription.textContent = messageInput.value.trim()
@@ -399,6 +486,16 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && overlay.classList.contains("is-open")) closeDialog();
     });
+    if (visualViewport) {
+      visualViewport.addEventListener("resize", updateMobileViewport);
+      visualViewport.addEventListener("scroll", updateMobileViewport);
+    }
+    window.addEventListener("resize", updateMobileViewport);
+    window.addEventListener("orientationchange", () => {
+      stableViewportHeight = visualViewport ? visualViewport.height : window.innerHeight;
+      setTimeout(updateMobileViewport, 120);
+    });
+    updateMobileViewport();
   </script>
 </body>
 </html>
