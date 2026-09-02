@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
-  <title>eSignon 완료 UI 타입 테스트 v40.92</title>
+  <title>eSignon 완료 UI 타입 테스트 v40.94</title>
   <style>
     :root {
       --blue-50: #eaf6ff;
@@ -48,8 +48,6 @@
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     }
     .test-action:hover { background: var(--green-600); }
-    .test-action.review { background: var(--blue-500); }
-    .test-action.review:hover { background: var(--blue-600); }
     .test-action:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 2px; }
 
     .completion-message {
@@ -184,15 +182,14 @@
         content: ""; width: 48px; height: 4px; flex: 0 0 auto; border-radius: 2px;
         background: var(--gray-200);
       }
-      .dialog-header { padding: 16px 16px 0; flex: 0 0 auto; }
+      .dialog-header { padding: 16px 16px 0; margin-bottom: 16px; flex: 0 0 auto; }
       .dialog-title { font-size: 20px; line-height: 1.4; }
-      .dialog-subtitle { margin-top: 6px; padding-bottom: 8px; }
+      .dialog-subtitle { margin-top: 6px; padding-bottom: 0; }
       .dialog-body {
-        margin-top: 0; padding: 16px 16px 0; min-height: 0;
+        margin-top: 0; padding: 0 16px; min-height: 0;
         flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
       }
-      .dialog.has-subtitle .dialog-body { padding-top: 4px; }
       .recipient-message { margin-top: 12px; }
       .dialog-footer {
         margin-top: 0; padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
@@ -220,7 +217,6 @@
   <main class="test-screen">
     <div id="testActions" class="test-actions">
       <button class="test-action" type="button" data-completion-type="sign">서명 요청 완료 화면</button>
-      <button class="test-action review" type="button" data-completion-type="review">검토 요청 완료 화면</button>
     </div>
 
     <section id="completionMessage" class="completion-message" aria-live="polite">
